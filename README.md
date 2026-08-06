@@ -15,10 +15,23 @@
 ```text
 .
 ├── index.html                       # 首页内容和链接
-├── game/
-│   └── index.html                  # 子页面示例：/game/
+├── blog/
+│   ├── index.html                   # 博客列表（卡片布局 + 深度搜索 + 暗色模式）
+│   ├── style.css                    # 博客完整样式（含进度条 / TOC / 暗色变量）
+│   ├── posts.json                   # 文章元数据清单
+│   ├── post/index.html              # 文章渲染器（marked.js + TOC + 滚动进度）
+│   ├── archives/index.html          # 归档页（按年份分组）
+│   ├── categories/index.html        # 分类页（聚合 + 筛选）
+│   ├── tags/index.html              # 标签云 + 筛选
+│   ├── about/index.html             # 关于页面
+│   ├── links/index.html             # 友链页面
+│   ├── static/background.jpeg       # banner 背景图
+│   └── posts/
+│       ├── hello-world.md           # 示例文章
+│       ├── markdown-guide.md
+│       └── static-blog.md
 ├── assets/
-│   ├── css/style.css               # 页面样式与渐变动画
+│   ├── css/style.css               # 首页样式与动效渐变
 │   ├── data/colors.json            # 渐变颜色配置
 │   └── js/main.js                  # 加载并应用颜色配置
 ├── .github/workflows/deploy.yml    # GitHub Pages 部署工作流
@@ -46,8 +59,8 @@
 
 - 修改 `<title>`、`<h1>` 和 `.tagline` 可替换站点标题与副标题。
 - 修改 `.avatar` 的 `src` 可替换头像，建议把图片放在 `assets/images/` 后使用相对路径。
-- 修改 `.links` 内的 `<a>` 可配置 About、Blog、GitHub、Weibo、Telegram 和 Feed。
-- 当前 Blog 指向示例页面 `game/`；Weibo、Telegram 和 Feed 是待配置的 `#` 占位链接。
+- 修改 `.links` 内的 `<a>` 可配置 About、Blog、Gallery、GitHub 等链接。
+- Blog 指向 `blog/` 文件夹；其余链接可根据需要自由替换。
 
 ## 配置动态渐变
 
@@ -70,23 +83,61 @@
 - `speed` 是一次循环的时长，可使用 `s` 或 `ms`，例如 `12s`、`8000ms`。
 - 如果配置加载失败，页面会自动使用 [`assets/css/style.css`](assets/css/style.css) 中的默认配色。
 
-## 新建子页面
+## 博客系统
 
-GitHub Pages 会把目录中的 `index.html` 作为该目录的入口文件。比如要创建：
+完全仿照 [dianhsu.com](https://www.dianhsu.com/) (Hexo + Fluid 主题) 的布局与交互，全部用原生 HTML/CSS/JS 实现。
 
-```text
-https://<你的用户名>.github.io/blog/
+**核心文件：**
+
+| 路径 | 功能 |
+|------|------|
+| `blog/` | 博客列表（卡片布局 + 分页 + 搜索 + 暗色模式） |
+| `blog/post/?p=slug` | 文章详情（marked.js 渲染 MD + TOC 目录 + 滚动进度） |
+| `blog/archives/` | 归档（按年份分组） |
+| `blog/categories/` | 分类聚合（点击分类筛选文章） |
+| `blog/tags/` | 标签云（点击标签筛选文章） |
+| `blog/about/` | 关于页面 |
+| `blog/links/` | 友链页面 |
+| `blog/static/background.jpeg` | Banner 背景图 |
+| `blog/style.css` | 全局博客样式（含进度条、回顶按钮、暗色主题变量） |
+
+**特性：**
+
+- 支持亮色/暗色模式（跟随系统或手动切换，`localStorage` 持久化）
+- 全文搜索（`Ctrl+K` 打开搜索框，模糊匹配标题/摘要/分类/标签）
+- 阅读进度条 + 回到顶部按钮
+- 文章 TOC 目录（从 h2/h3 自动生成，IntersectionObserver 高亮当前阅读位置）
+- Banner 打字机动画
+- 完全响应式，移动端适配
+
+### 发布新文章
+
+1. 在 `blog/posts/` 下新建 `.md` 文件
+2. 在 `blog/posts.json` 中添加元数据：
+
+```json
+{
+  "slug": "my-post",
+  "title": "文章标题",
+  "date": "2026-08-06",
+  "categories": ["分类"],
+  "tags": ["标签1", "标签2"],
+  "excerpt": "摘要",
+  "cover": "https://example.com/cover.jpg"
+}
 ```
 
-可以这样做：
+- `slug` = 不含扩展名的 `.md` 文件名
+- `cover` 留空则不显示封面图
+- 分类和标签会自动聚合到对应页面
 
-1. 复制 `game/` 文件夹并重命名为 `blog/`。
-2. 编辑 `blog/index.html` 中的标题和内容。
-3. 保持共享资源使用上一级相对路径，例如 `../assets/css/style.css`。
-4. 在首页导航中加入 `<a href="blog/">Blog</a>`。
-5. 推送到 `main`，Actions 会自动重新发布。
+### 更换 Banner 背景
 
-更深层级的页面同理，但需要按目录深度调整 `../` 的数量。
+替换 `blog/static/background.jpeg` 即可。如使用其他路径或在线图片，修改 `blog/index.html` 中 banner 的 `--banner-img`。
+
+## 新建通用子页面
+
+延续"文件夹即页面"的规则：
 
 ## 本地预览
 
