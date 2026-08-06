@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>标签 | Haruko386</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a class="navbar-brand" href="../">Haruko386 の blog</a>
+      <button class="navbar-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <div class="navbar-links" id="navLinks">
+        <a href="../../">首页</a><a href="../">博客</a><a href="../archives/">归档</a><a href="../categories/">分类</a><a href="../tags/">标签</a><a href="../about/">关于</a><a href="../links/">友链</a>
+        <button class="navbar-icon" id="themeToggle">&#x1F31F;</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top:6rem;" id="mainContent">
+    <h1 style="text-align:center;margin-bottom:2rem;">标签</h1>
+    <div id="content" style="text-align:center;color:var(--muted);">加载中...</div>
+  </main>
+
+  <button id="scroll-top">&#x2191;</button>
+  <footer class="blog-footer"><p>Powered by vanilla HTML / CSS / JS</p></footer>
+
+  <script>
+    document.getElementById('navToggle').onclick=function(){document.getElementById('navLinks').classList.toggle('open')};
+    window.addEventListener('scroll',function(){document.getElementById('progress-bar').style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';document.getElementById('scroll-top').classList.toggle('visible',window.scrollY>400)});
+    document.getElementById('scroll-top').onclick=function(){window.scrollTo({top:0,behavior:'smooth'})};
+    (function(){var t=document.getElementById('themeToggle'),s=localStorage.getItem('blog-theme'),d=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.setAttribute('data-theme','dark');t.onclick=function(){var i=document.documentElement.getAttribute('data-theme')==='dark';if(i){document.documentElement.removeAttribute('data-theme');localStorage.setItem('blog-theme','light')}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('blog-theme','dark')}}})();
+
+    fetch('../posts.json').then(function(r){return r.json()}).then(function(posts){
+      posts=Array.isArray(posts)?posts:[];
+      var tags={};
+      posts.forEach(function(p){(p.tags||[]).forEach(function(t){tags[t]=(tags[t]||0)+1})});
+      var names=Object.keys(tags).sort();
+      var max=Math.max.apply(null,names.map(function(n){return tags[n]}))||1;
+
+      var param=new URLSearchParams(location.search).get('t');
+      var html='<div class="tag-cloud">';
+      names.forEach(function(n){
+        var sz=tags[n]/max<0.4?'tag-sm':tags[n]/max<0.7?'':'tag-lg';
+        html+='<a class="meta-tag '+sz+'" href="?t='+encodeURIComponent(n)+'">'+n+' ('+tags[n]+')</a>';
+      });
+      html+='</div>';
+
+      if(param&&tags[param]){
+        html+='<div class="tags-posts"><h2 style="margin:2rem 0 1rem;">#'+param+'</h2>';
+        posts.filter(function(p){return(p.tags||[]).indexOf(param)!==-1}).forEach(function(p){
+          html+='<div class="archive-item"><span class="archive-date">'+(p.date||'')+'</span><a href="../post/?p='+encodeURIComponent(p.slug)+'">'+p.title+'</a></div>';
+        });
+        html+='</div>';
+      }
+      document.getElementById('content').innerHTML=html||'<p style="color:var(--muted);">暂无标签</p>';
+    });
+  </script>
+</body>
+</html>

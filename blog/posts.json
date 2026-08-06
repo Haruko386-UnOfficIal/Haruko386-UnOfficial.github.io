@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "Hello World — 我的第一篇博客",
+    "date": "2026-08-06",
+    "categories": ["杂谈"],
+    "tags": ["博客", "开始"],
+    "excerpt": "这是我的第一篇博客文章。在这里记录我的一些想法、项目和学习笔记。",
+    "cover": ""
+  },
+  {
+    "slug": "markdown-guide",
+    "title": "Markdown 写作指南",
+    "date": "2026-07-15",
+    "categories": ["工具"],
+    "tags": ["Markdown", "写作", "前端"],
+    "excerpt": "一篇简短的 Markdown 语法示例，包含标题、代码块、列表、引用等常用格式。",
+    "cover": ""
+  },
+  {
+    "slug": "static-blog",
+    "title": "如何用原生 HTML 搭建一个静态博客",
+    "date": "2026-06-20",
+    "categories": ["教程", "前端"],
+    "tags": ["GitHub Pages", "JavaScript", "Markdown"],
+    "excerpt": "不依赖任何框架，只用 HTML、CSS 和 JS 就能在 GitHub Pages 上跑一个完整博客。",
+    "cover": ""
+  }
+]

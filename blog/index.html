@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Haruko386</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+  <!-- progress bar -->
+  <div id="progress-bar"></div>
+
+  <!-- ========== navbar ========== -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a class="navbar-brand" href=".">Haruko386 の blog</a>
+      <button class="navbar-toggle" id="navToggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="navbar-links" id="navLinks">
+        <a href="../">首页</a>
+        <a href=".">博客</a>
+        <a href="archives/">归档</a>
+        <a href="categories/">分类</a>
+        <a href="tags/">标签</a>
+        <a href="about/">关于</a>
+        <a href="links/">友链</a>
+        <button class="navbar-icon" id="searchBtn" title="搜索" aria-label="搜索">&#x1F50D;</button>
+        <button class="navbar-icon" id="themeToggle" title="切换暗色模式" aria-label="切换暗色模式">&#x1F31F;</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== banner ========== -->
+  <header class="banner" style="--banner-img:url('static/background.jpeg')">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <h1 class="banner-title typing-cursor" id="bannerTitle"></h1>
+      <p class="banner-subtitle">记录 &amp; 分享</p>
+    </div>
+    <div class="scroll-down" aria-hidden="true" onclick="document.getElementById('postList').scrollIntoView({behavior:'smooth'})">&#x2193;</div>
+  </header>
+
+  <!-- ========== search modal ========== -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="输入关键词搜索..." autofocus>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <!-- ========== post list ========== -->
+  <main class="container" id="postList">
+    <div style="text-align:center;color:var(--muted);padding:3rem 0;">加载中...</div>
+  </main>
+
+  <!-- ========== pagination ========== -->
+  <nav class="pagination" id="pagination"></nav>
+
+  <!-- ========== scroll to top ========== -->
+  <button id="scroll-top" title="回到顶部" aria-label="回到顶部">&#x2191;</button>
+
+  <!-- ========== footer ========== -->
+  <footer class="blog-footer">
+    <p>Powered by vanilla HTML / CSS / JS · <a href="https://github.com/Haruko386">GitHub</a></p>
+  </footer>
+
+  <script>
+  /* ===== typing ===== */
+  (function () {
+    var text = 'ようこそ';
+    var el = document.getElementById('bannerTitle');
+    var i = 0;
+    function type() { if (i<text.length){el.textContent+=text.charAt(i);i++;setTimeout(type,120);} }
+    type();
+  })();
+
+  /* ===== navbar toggle ===== */
+  document.getElementById('navToggle').onclick = function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  };
+
+  /* ===== progress bar ===== */
+  window.addEventListener('scroll', function () {
+    var bar = document.getElementById('progress-bar');
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (h > 0) bar.style.width = (window.scrollY / h * 100) + '%';
+  });
+
+  /* ===== scroll-to-top ===== */
+  var scrollTopBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', function () {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+  scrollTopBtn.onclick = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+  /* ===== dark mode ===== */
+  (function () {
+    var toggle = document.getElementById('themeToggle');
+    var saved = localStorage.getItem('blog-theme');
+    var dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme:dark)').matches);
+    if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+    toggle.onclick = function () {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('blog-theme','light'); }
+      else { document.documentElement.setAttribute('data-theme','dark'); localStorage.setItem('blog-theme','dark'); }
+    };
+  })();
+
+  /* ===== search ===== */
+  (function () {
+    var overlay = document.getElementById('searchOverlay');
+    var input = document.getElementById('searchInput');
+    var results = document.getElementById('searchResults');
+    var allPosts = [];
+    var postsPromise = null;
+
+    document.getElementById('searchBtn').onclick = function () { overlay.classList.add('active'); input.focus(); };
+    overlay.onclick = function (e) { if (e.target === overlay) overlay.classList.remove('active'); };
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') overlay.classList.remove('active');
+      if ((e.ctrlKey||e.metaKey) && e.key === 'k') { e.preventDefault(); overlay.classList.add('active'); input.focus(); }
+    });
+
+    function ensurePosts() {
+      if (!postsPromise) {
+        postsPromise = fetch('posts.json').then(function (r) { return r.json(); }).then(function (p) { allPosts = p||[]; });
+      }
+      return postsPromise;
+    }
+
+    input.oninput = function () {
+      var q = input.value.trim().toLowerCase();
+      ensurePosts().then(function () {
+        if (!q) { results.innerHTML = ''; return; }
+        var filtered = allPosts.filter(function (p) {
+          return p.title.toLowerCase().indexOf(q) !== -1 ||
+                 (p.excerpt||'').toLowerCase().indexOf(q) !== -1 ||
+                 (p.categories||[]).join(' ').toLowerCase().indexOf(q) !== -1 ||
+                 (p.tags||[]).join(' ').toLowerCase().indexOf(q) !== -1;
+        });
+        results.innerHTML = filtered.length
+          ? filtered.map(function (p) {
+              return '<a class="search-result-item" href="post/?p='+encodeURIComponent(p.slug)+'">'
+                + '<div class="result-title">'+p.title+'</div>'
+                + '<div class="result-excerpt">'+(p.excerpt||'')+'</div>'
+                + '</a>';
+            }).join('')
+          : '<div style="padding:1rem;color:var(--muted);text-align:center;">无匹配结果</div>';
+      });
+    };
+  })();
+
+  /* ===== render posts ===== */
+  var PAGE_SIZE = 7;
+
+  function renderPosts(posts, page) {
+    var totalPages = Math.ceil(posts.length / PAGE_SIZE) || 1;
+    var start = (page - 1) * PAGE_SIZE;
+    var list = posts.slice(start, start + PAGE_SIZE);
+    var container = document.getElementById('postList');
+
+    if (!list.length) {
+      container.innerHTML = '<p style="text-align:center;color:var(--muted);padding:3rem 0;">还没有文章，去 <code>blog/posts.json</code> 添加第一篇吧。</p>';
+      return;
+    }
+
+    container.innerHTML = list.map(function (post) {
+      return '<div class="index-card">'
+        + (post.cover
+            ? '<div class="index-img"><img src="'+post.cover+'" alt="'+post.title+'" loading="lazy"></div>'
+            : '')
+        + '<div class="index-info">'
+        + '<h2 class="index-header"><a href="post/?p='+encodeURIComponent(post.slug)+'">'+post.title+'</a></h2>'
+        + '<div class="index-excerpt">'+(post.excerpt||'')+'</div>'
+        + '<div class="index-meta">'
+        + (post.date ? '<span>'+post.date+'</span>' : '')
+        + (post.categories||[]).map(function(c){return '<span>'+c+'</span>';}).join('')
+        + '<span class="meta-tags">'+(post.tags||[]).map(function(t){return '<a class="meta-tag" href="tags/?t='+encodeURIComponent(t)+'">#'+t+'</a>';}).join('')+'</span>'
+        + '</div></div></div>';
+    }).join('');
+
+    var pag = document.getElementById('pagination');
+    if (totalPages <= 1) { pag.innerHTML = ''; return; }
+    pag.innerHTML = '';
+    for (var p = 1; p <= totalPages; p++) {
+      var btn = document.createElement('a');
+      btn.className = 'page-btn' + (p === page ? ' current' : '');
+      btn.textContent = p;
+      btn.href = '?page=' + p;
+      pag.appendChild(btn);
+    }
+  }
+
+  function getPage() { var m = location.search.match(/page=(\d+)/); return m?Math.max(1,parseInt(m[1],10)):1; }
+
+  fetch('posts.json')
+    .then(function (r) { return r.json(); })
+    .then(function (posts) { renderPosts(Array.isArray(posts)?posts:[], getPage()); })
+    .catch(function (e) {
+      document.getElementById('postList').innerHTML = '<p style="text-align:center;color:var(--muted);padding:3rem 0;">加载失败：'+e.message+'</p>';
+    });
+  </script>
+</body>
+</html>
