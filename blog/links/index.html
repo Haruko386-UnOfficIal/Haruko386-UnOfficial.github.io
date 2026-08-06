@@ -1,48 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>友链 | Haruko386</title>
-  <link rel="stylesheet" href="../style.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>链接 | Haruko386</title><link rel="stylesheet" href="../style.css">
 </head>
-<body>
-
-  <div id="progress-bar"></div>
-
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <a class="navbar-brand" href="../">Haruko386 の blog</a>
-      <button class="navbar-toggle" id="navToggle"><span></span><span></span><span></span></button>
-      <div class="navbar-links" id="navLinks">
-        <a href="../../">首页</a><a href="../">博客</a><a href="../archives/">归档</a><a href="../categories/">分类</a><a href="../tags/">标签</a><a href="../about/">关于</a><a href="../links/">友链</a>
-        <button class="navbar-icon" id="themeToggle">&#x1F31F;</button>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container" style="padding-top:6rem;">
-    <h1 style="text-align:center;margin-bottom:2rem;">友情链接</h1>
-    <div class="links-grid" id="linksGrid"></div>
-  </main>
-
-  <button id="scroll-top">&#x2191;</button>
-  <footer class="blog-footer"><p>Powered by vanilla HTML / CSS / JS</p></footer>
-
+<body data-blog-root="../" data-page="links">
+  <header data-site-header></header>
+  <section class="hero hero-compact" style="--hero-image:url('../static/background.jpeg')"><div class="hero-mask"></div><div class="hero-content"><h1 class="hero-title">链接</h1><p>有趣的人与好用的工具</p></div></section>
+  <main class="page-shell simple-shell"><section class="board page-board"><h2 class="page-title">友情链接</h2><div class="links-grid" id="linksGrid"></div></section></main>
+  <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button><footer class="site-footer" data-site-footer></footer>
+  <script src="../app.js"></script>
   <script>
-    document.getElementById('navToggle').onclick=function(){document.getElementById('navLinks').classList.toggle('open')};
-    window.addEventListener('scroll',function(){document.getElementById('progress-bar').style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';document.getElementById('scroll-top').classList.toggle('visible',window.scrollY>400)});
-    document.getElementById('scroll-top').onclick=function(){window.scrollTo({top:0,behavior:'smooth'})};
-    (function(){var t=document.getElementById('themeToggle'),s=localStorage.getItem('blog-theme'),d=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.setAttribute('data-theme','dark');t.onclick=function(){var i=document.documentElement.getAttribute('data-theme')==='dark';if(i){document.documentElement.removeAttribute('data-theme');localStorage.setItem('blog-theme','light')}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('blog-theme','dark')}}})();
-
     var links = [
-      { name: 'dianhsuのblog', url: 'https://www.dianhsu.com/', desc: 'Fluid 主题参考来源', avatar: '' },
-      { name: 'GitHub', url: 'https://github.com/Haruko386', desc: 'Haruko386 on GitHub', avatar: '' }
+      { name: 'dianhsuのblog', url: 'https://www.dianhsu.com/', desc: 'Fluid 风格参考博客' },
+      { name: 'Fomalhaut', url: 'https://www.fomal.cc/', desc: 'Future is now' },
+      { name: 'konng', url: 'https://wikif.vercel.app/', desc: 'Waiting is a lost art' },
+      { name: '宫水三叶', url: 'https://sharingsource.github.io/', desc: '刷题日记' },
+      { name: 'DeepL', url: 'https://www.deepl.com/translator', desc: '翻译工具' },
+      { name: 'Clist', url: 'https://clist.by/', desc: '算法竞赛日程聚合' }
     ];
-
-    document.getElementById('linksGrid').innerHTML = links.map(function(l){
-      return '<a class="link-card" href="'+l.url+'" target="_blank" rel="noopener">'
-        + '<div class="link-card-info"><div class="link-name">'+l.name+'</div><div class="link-desc">'+l.desc+'</div></div></a>';
+    document.getElementById('linksGrid').innerHTML = links.map(function (link) {
+      return '<a class="link-card" href="' + link.url + '" target="_blank" rel="noopener"><div><div class="link-name">' + Blog.escapeHtml(link.name) + '</div><div class="link-desc">' + Blog.escapeHtml(link.desc) + '</div></div></a>';
     }).join('');
   </script>
 </body>

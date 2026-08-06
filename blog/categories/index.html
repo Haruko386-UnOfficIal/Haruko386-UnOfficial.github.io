@@ -1,61 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>分类 | Haruko386</title>
-  <link rel="stylesheet" href="../style.css">
-</head>
-<body>
-
-  <div id="progress-bar"></div>
-
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <a class="navbar-brand" href="../">Haruko386 の blog</a>
-      <button class="navbar-toggle" id="navToggle"><span></span><span></span><span></span></button>
-      <div class="navbar-links" id="navLinks">
-        <a href="../../">首页</a><a href="../">博客</a><a href="../archives/">归档</a><a href="../categories/">分类</a><a href="../tags/">标签</a><a href="../about/">关于</a><a href="../links/">友链</a>
-        <button class="navbar-icon" id="themeToggle">&#x1F31F;</button>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container" style="padding-top:6rem;" id="mainContent">
-    <h1 style="text-align:center;margin-bottom:2rem;">分类</h1>
-    <div id="content" style="text-align:center;color:var(--muted);">加载中...</div>
-  </main>
-
-  <button id="scroll-top">&#x2191;</button>
-  <footer class="blog-footer"><p>Powered by vanilla HTML / CSS / JS</p></footer>
-
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>分类 | Haruko386</title><link rel="stylesheet" href="../style.css"></head>
+<body data-blog-root="../" data-page="categories">
+  <header data-site-header></header>
+  <section class="hero hero-compact" style="--hero-image:url('../static/background.jpeg')"><div class="hero-mask"></div><div class="hero-content"><h1 class="hero-title">分类</h1><p>按主题浏览文章</p></div></section>
+  <main class="page-shell simple-shell"><section class="board page-board"><h2 class="page-title">文章分类</h2><div id="content" class="loading-state">正在读取分类…</div></section></main>
+  <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button><footer class="site-footer" data-site-footer></footer><script src="../app.js"></script>
   <script>
-    document.getElementById('navToggle').onclick=function(){document.getElementById('navLinks').classList.toggle('open')};
-    window.addEventListener('scroll',function(){document.getElementById('progress-bar').style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';document.getElementById('scroll-top').classList.toggle('visible',window.scrollY>400)});
-    document.getElementById('scroll-top').onclick=function(){window.scrollTo({top:0,behavior:'smooth'})};
-    (function(){var t=document.getElementById('themeToggle'),s=localStorage.getItem('blog-theme'),d=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.setAttribute('data-theme','dark');t.onclick=function(){var i=document.documentElement.getAttribute('data-theme')==='dark';if(i){document.documentElement.removeAttribute('data-theme');localStorage.setItem('blog-theme','light')}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('blog-theme','dark')}}})();
-
-    fetch('../posts.json').then(function(r){return r.json()}).then(function(posts){
-      posts=Array.isArray(posts)?posts:[];
-      var cats={};
-      posts.forEach(function(p){(p.categories||[]).forEach(function(c){cats[c]=(cats[c]||0)+1})});
-      var names=Object.keys(cats).sort();
-      var html='<div class="category-list">';
-      names.forEach(function(n){
-        html+='<a class="category-item" href="?c='+encodeURIComponent(n)+'"><span>'+n+'</span><span class="category-count">'+cats[n]+' 篇</span></a>';
-      });
-      html+='</div>';
-
-      var param=new URLSearchParams(location.search).get('c');
-      if(param&&cats[param]){
-        html+='<div class="category-posts"><h2 style="margin-bottom:1rem;">&#x1F4C2; '+param+'</h2>';
-        posts.filter(function(p){return(p.categories||[]).indexOf(param)!==-1}).forEach(function(p){
-          html+='<div class="archive-item"><span class="archive-date">'+(p.date||'')+'</span><a href="../post/?p='+encodeURIComponent(p.slug)+'">'+p.title+'</a></div>';
-        });
-        html+='</div>';
-      }
-      document.getElementById('content').innerHTML=html||'<p style="color:var(--muted);">暂无分类</p>';
+    Blog.loadPosts().then(function (posts) {
+      var selected = new URLSearchParams(location.search).get('c');
+      var counts = {};
+      posts.forEach(function (post) { (post.categories || []).forEach(function (item) { counts[item] = (counts[item] || 0) + 1; }); });
+      var names = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+      var html = '<div class="profile-links">' + names.map(function (name) { return '<a href="?c=' + encodeURIComponent(name) + '">' + Blog.escapeHtml(name) + ' · ' + counts[name] + '</a>'; }).join('') + '</div>';
+      if (selected) html += '<section class="archive-group" style="margin-top:34px"><div class="archive-year">' + Blog.escapeHtml(selected) + '</div>' + posts.filter(function (post) { return (post.categories || []).indexOf(selected) >= 0; }).map(function (post) { return '<div class="archive-row"><time>' + Blog.escapeHtml(post.date) + '</time><a href="' + Blog.postUrl(post) + '">' + Blog.escapeHtml(post.title) + '</a></div>'; }).join('') + '</section>';
+      var node = document.getElementById('content'); node.className = ''; node.innerHTML = html;
     });
   </script>
-</body>
-</html>
+</body></html>

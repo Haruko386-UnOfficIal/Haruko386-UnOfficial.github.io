@@ -1,116 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Haruko386 的博客文章。">
   <title>文章 | Haruko386</title>
   <link rel="stylesheet" href="../style.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
 </head>
-<body>
-
-  <div id="progress-bar"></div>
-
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <a class="navbar-brand" href="../">Haruko386 の blog</a>
-      <button class="navbar-toggle" id="navToggle"><span></span><span></span><span></span></button>
-      <div class="navbar-links" id="navLinks" style="display:flex;">
-        <a href="../../">首页</a><a href="../">博客</a><a href="../archives/">归档</a><a href="../categories/">分类</a><a href="../tags/">标签</a><a href="../about/">关于</a><a href="../links/">友链</a>
-        <button class="navbar-icon" id="themeToggle">&#x1F31F;</button>
-      </div>
+<body data-blog-root="../" data-page="post">
+  <header data-site-header></header>
+  <section class="hero hero-compact" id="postHero" style="--hero-image:url('../static/background.jpeg')">
+    <div class="hero-mask"></div>
+    <div class="hero-content">
+      <h1 class="hero-title post-hero-title" id="postTitle">文章</h1>
+      <div class="post-hero-meta" id="postMeta"></div>
     </div>
-  </nav>
+  </section>
 
-  <main class="container" style="padding-top:6rem;">
-    <div id="postHeaderContent"></div>
-    <div class="post-layout">
-      <div class="post-body-wrap">
-        <article class="post-body" id="postBody">
-          <p style="text-align:center;color:var(--muted);padding:2rem 0;">加载中...</p>
-        </article>
+  <main class="article-shell">
+    <section class="board article-board">
+      <div class="article-grid">
+        <article class="markdown-body" id="postBody"><div class="article-loading">正在读取文章…</div></article>
+        <aside class="toc" id="toc" aria-label="文章目录"></aside>
       </div>
-      <nav id="toc" aria-label="文章目录"></nav>
-    </div>
+      <div class="article-tags" id="postTags"></div>
+      <div class="article-note">本文由 Haruko386 创作；如需转载，请保留原文链接与作者信息。</div>
+    </section>
   </main>
 
-  <button id="scroll-top">&#x2191;</button>
-  <footer class="blog-footer"><p>Powered by vanilla HTML / CSS / JS</p></footer>
-
+  <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button>
+  <footer class="site-footer" data-site-footer></footer>
+  <script src="../app.js"></script>
   <script>
-    document.getElementById('navToggle').onclick=function(){document.getElementById('navLinks').classList.toggle('open')};
-    window.addEventListener('scroll',function(){document.getElementById('progress-bar').style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';document.getElementById('scroll-top').classList.toggle('visible',window.scrollY>400)});
-    document.getElementById('scroll-top').onclick=function(){window.scrollTo({top:0,behavior:'smooth'})};
-    (function(){var t=document.getElementById('themeToggle'),s=localStorage.getItem('blog-theme'),d=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.setAttribute('data-theme','dark');t.onclick=function(){var i=document.documentElement.getAttribute('data-theme')==='dark';if(i){document.documentElement.removeAttribute('data-theme');localStorage.setItem('blog-theme','light')}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('blog-theme','dark')}}})();
-
     (function () {
-      var params = new URLSearchParams(location.search);
-      var slug = params.get('p');
-      if (!slug || !/^[a-zA-Z0-9_-]+$/.test(slug)) {
-        document.getElementById('postBody').innerHTML = '<p style="text-align:center;color:var(--muted);padding:2rem 0;">缺少文章参数。</p>';
-        document.title = '未找到 | Haruko386';
-        return;
-      }
+      var slug = new URLSearchParams(location.search).get('p');
+      var body = document.getElementById('postBody');
+      if (!slug) { body.innerHTML = '<p class="error-state">没有指定文章。</p>'; return; }
 
-      var mdPath = '../posts/' + slug + '.md';
-
-      fetch('../posts.json')
-        .then(function (r) { return r.json(); })
-        .then(function (posts) {
-          var meta = (posts||[]).find(function (p) { return p.slug === slug; });
-          if (meta) {
-            document.title = meta.title + ' | Haruko386';
-            document.getElementById('postHeaderContent').innerHTML =
-              '<div class="post-header">'
-              + '<h1 class="post-title">' + meta.title + '</h1>'
-              + '<div class="post-meta">'
-              + (meta.date ? meta.date + ' &nbsp; ' : '')
-              + (meta.categories||[]).join(' / ')
-              + '</div>'
-              + '<div style="margin-top:0.6rem;">'
-              + (meta.tags||[]).map(function (t) { return '<a class="meta-tag" href="../tags/?t=' + encodeURIComponent(t) + '">#' + t + '</a>'; }).join(' ')
-              + '</div></div>';
-          } else {
-            document.title = slug + ' | Haruko386';
-          }
-        });
-
-      fetch(mdPath)
-        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-        .then(function (md) {
-          document.getElementById('postBody').innerHTML = marked.parse(md);
-          buildTOC();
-        })
-        .catch(function (e) {
-          document.getElementById('postBody').innerHTML = '<p style="text-align:center;color:var(--muted);padding:2rem 0;">无法加载文章：' + e.message + '</p>';
-        });
-
-      function buildTOC() {
+      function renderToc() {
+        var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3'));
         var toc = document.getElementById('toc');
-        var headings = document.getElementById('postBody').querySelectorAll('h2, h3');
-        if (headings.length < 2) { toc.innerHTML = ''; return; }
-        var html = '';
-        headings.forEach(function (h, i) {
-          var id = 'heading-' + i;
-          h.id = id;
-          var cls = h.tagName === 'H2' ? 'toc-h2' : 'toc-h3';
-          html += '<a class="' + cls + '" href="#' + id + '">' + h.textContent + '</a>';
-        });
-        toc.innerHTML = html;
-
-        // highlight active heading on scroll
-        var links = toc.querySelectorAll('a');
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            var id = entry.target.id;
-            var link = toc.querySelector('a[href="#' + id + '"]');
-            if (link) link.classList.toggle('active', entry.isIntersecting);
-          });
-        }, { rootMargin: '-60px 0px -80% 0px' });
-        headings.forEach(function (h) { observer.observe(h); });
+        if (headings.length < 2) { toc.hidden = true; return; }
+        headings.forEach(function (heading, index) { heading.id = 'section-' + (index + 1); });
+        toc.innerHTML = '<div class="toc-title">目录</div>' + headings.map(function (heading) {
+          return '<a class="level-' + heading.tagName.slice(1) + '" href="#' + heading.id + '">' + Blog.escapeHtml(heading.textContent) + '</a>';
+        }).join('');
+        var tocLinks = toc.querySelectorAll('a');
+        if ('IntersectionObserver' in window) {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              tocLinks.forEach(function (link) { link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id); });
+            });
+          }, { rootMargin: '-15% 0px -75%' });
+          headings.forEach(function (heading) { observer.observe(heading); });
+        }
       }
+
+      Blog.loadPosts().then(function (posts) {
+        var post = posts.find(function (item) { return item.slug === slug; });
+        if (!post) throw new Error('没有找到这篇文章。');
+        document.title = post.title + ' | Haruko386';
+        document.getElementById('postTitle').textContent = post.title;
+        document.getElementById('postMeta').innerHTML =
+          (post.date ? '<span>▣ ' + Blog.escapeHtml(post.date) + '</span>' : '') +
+          (post.categories || []).map(function (category) { return '<span>◇ ' + Blog.escapeHtml(category) + '</span>'; }).join('');
+        document.getElementById('postTags').innerHTML = (post.tags || []).map(function (tag) {
+          return '<span class="article-tag"># ' + Blog.escapeHtml(tag) + '</span>';
+        }).join('');
+        if (post.cover) document.getElementById('postHero').style.setProperty('--hero-image', 'url("' + post.cover.replace(/["\\]/g, '') + '")');
+
+        return fetch('../posts/' + encodeURIComponent(post.file), { cache: 'no-cache' }).then(function (response) {
+          if (!response.ok) throw new Error('文章正文加载失败（' + response.status + '）');
+          return response.text();
+        });
+      }).then(function (markdown) {
+        markdown = markdown.replace(/^\uFEFF?---\s*\r?\n[\s\S]*?\r?\n---\s*(?:\r?\n|$)/, '');
+        marked.setOptions({ gfm: true, breaks: false });
+        body.innerHTML = marked.parse(markdown);
+        renderToc();
+      }).catch(function (error) { body.innerHTML = '<p class="error-state">' + Blog.escapeHtml(error.message) + '</p>'; });
     })();
   </script>
-
 </body>
 </html>

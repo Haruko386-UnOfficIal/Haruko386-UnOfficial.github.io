@@ -1,47 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>关于 | Haruko386</title>
-  <link rel="stylesheet" href="../style.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>关于 | Haruko386</title><link rel="stylesheet" href="../style.css">
 </head>
-<body>
-
-  <div id="progress-bar"></div>
-
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <a class="navbar-brand" href="../">Haruko386 の blog</a>
-      <button class="navbar-toggle" id="navToggle"><span></span><span></span><span></span></button>
-      <div class="navbar-links" id="navLinks">
-        <a href="../../">首页</a><a href="../">博客</a><a href="../archives/">归档</a><a href="../categories/">分类</a><a href="../tags/">标签</a><a href="../about/">关于</a><a href="../links/">友链</a>
-        <button class="navbar-icon" id="themeToggle">&#x1F31F;</button>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container" style="padding-top:6rem;">
-    <h1 style="text-align:center;margin-bottom:2rem;">关于</h1>
-    <div class="about-content">
-      <div>&#x1F331;</div>
-      <h2>你好，我是 Haruko386</h2>
-      <p>这是一个基于原生 HTML/CSS/JS 搭建的静态博客，托管在 GitHub Pages 上。</p>
-      <p>在这里记录技术笔记、项目心得和日常杂谈。</p>
-      <p style="margin-top:1.5rem;">
-        <a href="https://github.com/Haruko386" target="_blank" rel="noopener">GitHub</a>
-      </p>
-    </div>
-  </main>
-
-  <button id="scroll-top">&#x2191;</button>
-  <footer class="blog-footer"><p>Powered by vanilla HTML / CSS / JS</p></footer>
-
-  <script>
-    document.getElementById('navToggle').onclick=function(){document.getElementById('navLinks').classList.toggle('open')};
-    window.addEventListener('scroll',function(){document.getElementById('progress-bar').style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';document.getElementById('scroll-top').classList.toggle('visible',window.scrollY>400)});
-    document.getElementById('scroll-top').onclick=function(){window.scrollTo({top:0,behavior:'smooth'})};
-    (function(){var t=document.getElementById('themeToggle'),s=localStorage.getItem('blog-theme'),d=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.setAttribute('data-theme','dark');t.onclick=function(){var i=document.documentElement.getAttribute('data-theme')==='dark';if(i){document.documentElement.removeAttribute('data-theme');localStorage.setItem('blog-theme','light')}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('blog-theme','dark')}}})();
-  </script>
+<body data-blog-root="../" data-page="about">
+  <header data-site-header></header>
+  <section class="hero hero-compact" style="--hero-image:url('../static/background.jpeg')"><div class="hero-mask"></div><div class="hero-content"><h1 class="hero-title">关于</h1><p>你好，很高兴认识你</p></div></section>
+  <main class="page-shell simple-shell"><section class="board page-board about-card">
+    <div class="about-avatar"><img src="https://avatars.githubusercontent.com/u/140301008?v=4" alt="Haruko386 的头像"></div>
+    <div class="about-name">Haruko386</div>
+    <div class="about-intro">计算机科学学习者，曾经的算法竞赛爱好者。这里记录技术、项目与生活，也保存一路走来的思考。</div>
+    <div class="profile-links"><a href="https://github.com/Haruko386" target="_blank" rel="noopener">GitHub</a><a href="https://space.bilibili.com/291003955" target="_blank" rel="noopener">Bilibili</a><a href="https://leetcode.cn/u/endless_developy/" target="_blank" rel="noopener">LeetCode</a><a href="https://codeforces.com/profile/Developy" target="_blank" rel="noopener">Codeforces</a></div>
+  </section></main>
+  <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button><footer class="site-footer" data-site-footer></footer><script src="../app.js"></script>
 </body>
 </html>

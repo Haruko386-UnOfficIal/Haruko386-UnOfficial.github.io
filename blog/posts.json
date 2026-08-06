@@ -1,29 +1,382 @@
 [
   {
-    "slug": "hello-world",
-    "title": "Hello World — 我的第一篇博客",
-    "date": "2026-08-06",
-    "categories": ["杂谈"],
-    "tags": ["博客", "开始"],
-    "excerpt": "这是我的第一篇博客文章。在这里记录我的一些想法、项目和学习笔记。",
-    "cover": ""
+    "slug": "Q&A",
+    "file": "Q&A.md",
+    "title": "『Top📌』Welcome to Haruko386のblog",
+    "date": "2022-06-21",
+    "categories": [
+      "Q&A"
+    ],
+    "tags": [
+      "Quention & Answer"
+    ],
+    "cover": "https://s2.loli.net/2023/06/11/UisftN8CM325ruT.jpg",
+    "excerpt": "Q&A 你的昵称为什么叫Haruko386? 是我曾经喜欢的一位Up的名称，但由于我也不知道的原因她退网了，我用她曾经的昵称是为了永远记住她 这个博客会发布哪些内容？ 在2024年6月，也就是我本科毕业前更新的都是技术向的内容，现在读研阶段主要更一些技术向文章，以及是对自己所处的当下的一些思考。 你什么成分？ 就一计科硕士，方向是最没用的、最没前途的CV方向",
+    "top": true
   },
   {
-    "slug": "markdown-guide",
-    "title": "Markdown 写作指南",
-    "date": "2026-07-15",
-    "categories": ["工具"],
-    "tags": ["Markdown", "写作", "前端"],
-    "excerpt": "一篇简短的 Markdown 语法示例，包含标题、代码块、列表、引用等常用格式。",
-    "cover": ""
+    "slug": "Graduation",
+    "file": "Graduation.md",
+    "title": "毕业季的一些感慨",
+    "date": "2024-05-11",
+    "categories": [
+      "Diary"
+    ],
+    "tags": [],
+    "cover": "https://s2.loli.net/2024/05/11/zFPrk7deUCL6jTg.jpg",
+    "excerpt": "初夏 一转眼，大学的生活已经走到了结尾。今天收到了研究生录取调档函，原来不知不觉中考研那件似乎远在天边的事情也已经是昨天了事情了呀。 我看有人问：“四年前刚进入大学的你看到现在的你，那么四年前的你会怎么评价现在的你？” 我猜，那时候的我一定会说：“废物，四年就混了个这？别的不说，单拿出你考研，最后就整了个调剂上岸？调剂上岸能叫成功吗？” 根据我对我自己的了解",
+    "top": false
   },
   {
-    "slug": "static-blog",
-    "title": "如何用原生 HTML 搭建一个静态博客",
-    "date": "2026-06-20",
-    "categories": ["教程", "前端"],
-    "tags": ["GitHub Pages", "JavaScript", "Markdown"],
-    "excerpt": "不依赖任何框架，只用 HTML、CSS 和 JS 就能在 GitHub Pages 上跑一个完整博客。",
-    "cover": ""
+    "slug": "Codeforces Round 835 (Div. 4)",
+    "file": "Codeforces Round 835 (Div. 4).md",
+    "title": "Codeforces Round 835 (Div. 4)",
+    "date": "2022-11-22",
+    "categories": [
+      "CodeForces"
+    ],
+    "tags": [
+      "CodeForces Contest",
+      "模拟",
+      "排序",
+      "哈希表",
+      "二分查找",
+      "贪心"
+    ],
+    "cover": "https://s2.loli.net/2022/11/22/QxqplI7SEANkVRs.jpg",
+    "excerpt": "My Submission > Problem AC: 6 > > Problem Try: 6 > > Wrong Answer: 2 Medium Number 题意分析 ----------- 返回三个数中的第二大的数字 参考代码 ------------ Atilla's Favorite Problem 题意分析 ------ 返回给定字符串中最大",
+    "top": false
+  },
+  {
+    "slug": "Moudle",
+    "file": "Moudle.md",
+    "title": "算竞模板",
+    "date": "2022-10-26",
+    "categories": [
+      "算竞模板"
+    ],
+    "tags": [
+      "算竞模板"
+    ],
+    "cover": "https://s2.loli.net/2022/10/26/ynHm4gTl317wvBa.png",
+    "excerpt": "前言: 所有模板仅仅为笔者自己在算竞中用到的模板 由于笔者竞赛分都很低，高级模板还请前往查看oldyan的算竞模板 数学 最大公约数 ---------- 最小公倍数 --------- 快速幂 ------------- 快速判断质数 ---------- 根据三点获取角度 图论 并查集 ----- BellmanFord ----------------",
+    "top": false
+  },
+  {
+    "slug": "Codeforces Round 827 (Div. 4)",
+    "file": "Codeforces Round 827 (Div. 4).md",
+    "title": "Codeforces Round 827 (Div. 4)",
+    "date": "2022-10-14",
+    "categories": [
+      "CodeForces"
+    ],
+    "tags": [
+      "CodeForces Contest",
+      "哈希表",
+      "脑筋急转弯",
+      "二分查找",
+      "贪心",
+      "离散化"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/rcXb3eyAEuG5Lx1.jpg",
+    "excerpt": "My Submission > Problem AC: 5 > > Problem Try: 6 > > Wrong Answer: 3 A. Sum 题意分析 -------- 签到题 参考代码 ----- B. Increasing 题意分析 ------- 检测数组是否含有重复元素 参考代码 ----- C. Stripes 题意分析 ----- 给定",
+    "top": false
+  },
+  {
+    "slug": "AtCoder-Bginner-Contest album1",
+    "file": "AtCoder-Bginner-Contest album1.md",
+    "title": "AtCoder Beginner Contest Album (272 - 282)",
+    "date": "2022-10-09",
+    "categories": [
+      "AtCoder"
+    ],
+    "tags": [
+      "AtCoder",
+      "广度优先搜索",
+      "贪心"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/iwW1qY9VFsQdvEp.jpg",
+    "excerpt": "前言: 笔者很菜，这里只总结ABC的D，E两题 D - Root M Leaper 题意分析 ---- 最初你的棋子在(1,1)格，给定一个nn大小的棋盘，返回一个数字棋盘，上面的数字时到达该位置的最小跳跃次数; 你每次只能跳跃到距离所在格子距离为$$\\sqrt m$$的格子上 广度优先搜索，有趣的点在于根据M快速定位出每次i, j移动的范围 参考代码 --",
+    "top": false
+  },
+  {
+    "slug": "cyberspace",
+    "file": "cyberspace.md",
+    "title": "计算机网络",
+    "date": "2022-09-19",
+    "categories": [
+      "计算机网络"
+    ],
+    "tags": [
+      "计算机网络"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/mLvdNHeWE5PYTfO.jpg",
+    "excerpt": "计算机网络体系结构 计算机网络概述 计算机网络 概念 组成 功能 数据通信 资源共享 分布式处理 提高可靠性 负载均衡 分类 分布范围 广域网 城域网 局域网 个人区域网 传输技术 广播式网络 点对点网络 拓扑结构 星形 总线形 环形 网状形 使用者 公用网 专用网 交换技术 电路交换 报文交换 分组交换 传输介质 有线 无线 标准化工作及相关组织 性能指标",
+    "top": false
+  },
+  {
+    "slug": "CNUPC2022",
+    "file": "CNUPC2022.md",
+    "title": "中国银联专场竞赛🏦",
+    "date": "2022-09-16",
+    "categories": [
+      "LeetCode"
+    ],
+    "tags": [
+      "LeetCode Contest",
+      "模拟",
+      "双指针",
+      "二分查找",
+      "链表"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/qSx5oJQOdF4APUH.jpg",
+    "excerpt": "专场信息 比赛链接：中国银联专场竞赛（2023届校园招聘专场） - 力扣（LeetCode） 排名： 题目解析(Q1, Q2, Q3) 银联-1. 重构链表 题意分析 ----- 给定一个链表，删除其中的所有偶数的节点 链表题大多数都可以用线性表水过去，笔者在此提供水版和正解版两种 正解： 使用一个哨兵节点，选择性地将链表中的元素加入其中 参考代码 ----",
+    "top": false
+  },
+  {
+    "slug": "Operation-System",
+    "file": "Operation-System.md",
+    "title": "操作系统",
+    "date": "2022-08-21",
+    "categories": [
+      "操作系统"
+    ],
+    "tags": [
+      "操作系统"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/R6JOuxbw9jty4zA.jpg",
+    "excerpt": "前言 此文章中的全部内容均为Xmind思维导图导出的MD格式文件，阅读效果必定不如直接读思维导图 下载链接： 操作系统.pdf 操作系统.xmind PS:这是思维导图，不是知识点详解 操作系统概述 操作系统的基本概念 操作系统的概念 是控制和管理整个计算机软硬件资源，合理地组织，调度计算机的工作和资源的分配，进而为用户和其它软件提供方便接口与程序集合 操作",
+    "top": false
+  },
+  {
+    "slug": "Principles-of-computer-composition",
+    "file": "Principles-of-computer-composition.md",
+    "title": "计算机组成原理",
+    "date": "2022-08-20",
+    "categories": [
+      "计算机组成原理"
+    ],
+    "tags": [
+      "计算机组成原理"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/84U9DQZvAJfwNFH.jpg",
+    "excerpt": "前言 此文章中的全部内容均为Xmind思维导图导出的MD格式文件，阅读效果必定不如直接读思维导图 下载链接： 计算机组成原理.pdf 计算机组成原理.xmind PS:这是思维导图，不是知识点详解 计算机系统概述 计算机系统简介 软件 系统软件 应用软件 硬件 计算机的发展历程 第一代计算机 电子管 第二代计算机 晶体管 第三代计算机 中小规模集成电路 第四",
+    "top": false
+  },
+  {
+    "slug": "LeetCode-Weekly-Contest-album1",
+    "file": "LeetCode-Weekly-Contest-album1.md",
+    "title": "LeetCode Weekly Contest Album (307 - 317)",
+    "date": "2022-08-20",
+    "categories": [
+      "LeetCode"
+    ],
+    "tags": [
+      "LeetCode Contest",
+      "差分数组",
+      "贪心",
+      "广度优先搜索(BFS)",
+      "拓扑排序",
+      "模拟",
+      "哈希表"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/EQuDCg87i3qjKto.jpg",
+    "excerpt": "B85 - T3 字母移位 II 题意分析 ---------- 每次将给的区间内的字母+1或-1 区间和问题，可以使用差分数组来完成 参考代码 ----- B85 - T4 删除操作后的最大子段和 题意分析 ------- 每次删除数组中的一个数字，将数组分成多个子段 返回每次分割后的，子串的最大和 逆向遍历 + 并查集： 正向为删除，逆向则为链接子段 每",
+    "top": false
+  },
+  {
+    "slug": "AtCoder-Beginner-Contest-264",
+    "file": "AtCoder-Beginner-Contest-264.md",
+    "title": "freee Programming Contest 2022 (AtCoder Beginner Contest 264)",
+    "date": "2022-08-18",
+    "categories": [
+      "AtCoder"
+    ],
+    "tags": [
+      "AtCoder Contest"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/7QzSwKjCig1BaM9.jpg",
+    "excerpt": "My SubMisson > Number of Problem: 7 > > Problem AC: 4 > > Wrong Answer: 2 C - Matrix Reducing 题意分析 ---- 给定一个源矩阵和目标矩阵，返回任意次操作后，是否可以得到目标矩阵 操作定义为： 选择矩阵的某一行并删除该行 选择矩阵的某一列并删除该列 模式匹配 + 模",
+    "top": false
+  },
+  {
+    "slug": "LeetCode-Weekly-Contest-305",
+    "file": "LeetCode-Weekly-Contest-305.md",
+    "title": "LeetCode Weekly Contest 305",
+    "date": "2022-08-07",
+    "categories": [
+      "LeetCode"
+    ],
+    "tags": [
+      "LeetCode Contest",
+      "枚举",
+      "广度优先搜索(BFS)",
+      "动态规划"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/ti5VJEc6s13vFfC.jpg",
+    "excerpt": "My Submission Problem AC: 4 Problem Try: 4 Wrong Answer: 1 Problem A：算术三元组的数目 题意分析 ----- 签到题：暴力模拟 参考代码 ---- Problem B：受限条件下可到达节点的数目 题意分析 ----- 广度优先搜索：先将限制节点设为已访问，再广度优先遍历图即可 参考代码 --",
+    "top": false
+  },
+  {
+    "slug": "LeetCode-Weekly-Contest-304",
+    "file": "LeetCode-Weekly-Contest-304.md",
+    "title": "LeetCode Weekly Contest 304",
+    "date": "2022-07-31",
+    "categories": [
+      "LeetCode"
+    ],
+    "tags": [
+      "LeetCode Contest",
+      "堆(优先队列)",
+      "哈希表",
+      "脑筋急转弯",
+      "广度优先搜索(BFS)",
+      "深度优先搜索(DFS)",
+      "拓扑排序"
+    ],
+    "cover": "https://s2.loli.net/2024/02/29/2utJoWYC3qQes9w.jpg",
+    "excerpt": "My Submission > Problem AC: 4 > > Problem Try: 4 > > Wrong Answer: 2 Problem A：使数组中所有元素都等于零 题意分析 ---- 签到题，优先队列 + 标记 参考代码 ---- Problem B：分组的最大数量 题意分析 ---- 脑筋急转弯： 按等差数列分组，若每次可以满足则下一个",
+    "top": false
+  },
+  {
+    "slug": "Codeforces Round 811 (Div. 3)",
+    "file": "Codeforces Round 811 (Div. 3).md",
+    "title": "Codeforces Round 811 (Div. 3)",
+    "date": "2022-07-30",
+    "categories": [
+      "CodeForces"
+    ],
+    "tags": [
+      "CodeForces Contest",
+      "脑筋急转弯",
+      "哈希表",
+      "贪心",
+      "数学"
+    ],
+    "cover": "https://s2.loli.net/2022/10/24/1eFKxhHICNPDwJ8.jpg",
+    "excerpt": "My Submission > Problem AC: 4 > > Problem Try: 5 > > Wrong Answer: 1 Problem A：Everyone Loves to Sleep 题意分析 ----- 给出Vlad的入睡时间和他的所有闹钟时间，返回他可以睡着的时长 模拟： 将所有小时转换为分钟数，找到第一个大于入睡时间的闹钟，若找不",
+    "top": false
+  },
+  {
+    "slug": "AcWing-Weekly-Contest-60",
+    "file": "AcWing-Weekly-Contest-60.md",
+    "title": "AcWing Weekly Contest 60",
+    "date": "2022-07-16",
+    "categories": [
+      "AcWing"
+    ],
+    "tags": [
+      "AcWing Contest",
+      "懒标记法",
+      "动态规划"
+    ],
+    "cover": "https://s2.loli.net/2024/02/29/EtHRL4bfkqzngG8.jpg",
+    "excerpt": "MY SUBMISSION > Problem AC: 3 > > Problem Try: 3 > > Wrong Answer: 0 Problem A：吃饭 题意分析 ---- 签到题 参考代码 ---- Problem B：数组操作 题意分析 ----- 每次找到数组中的最小值，若不为0，则整个数组减去，否则整个输出0 由于数组长度为$$10^5$$",
+    "top": false
+  },
+  {
+    "slug": "LC204-Count-Primes",
+    "file": "LC204-Count-Primes.md",
+    "title": "LC.204 Count-Primes",
+    "date": "2022-07-01",
+    "categories": [
+      "LeetCode"
+    ],
+    "tags": [
+      "Daily algorithm problem solving",
+      "埃氏晒",
+      "线性筛",
+      "奇数晒"
+    ],
+    "cover": "https://s2.loli.net/2024/02/29/sj6faQexWvnGrZJ.jpg",
+    "excerpt": "前言 质数是指在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数。 本题给定一个整数n，返回小于n的质数的个数 基本思路 枚举因数 ----- 对于一个整数x，可以从2开始枚举每一个可能的因数，一旦可以被整除，则不为质数 此方法对于小范围的n可行，但对于大范围的整数，对每一个数字的因数检查的时间开销都为O(n) 如n = 499979时会产生TLE",
+    "top": false
+  },
+  {
+    "slug": "LC273-Integer-to-English-Words",
+    "file": "LC273-Integer-to-English-Words.md",
+    "title": "LC.273 Integer to English Words",
+    "date": "2022-06-30",
+    "categories": [
+      "LeetCode"
+    ],
+    "tags": [
+      "Daily algorithm problem solving",
+      "递归",
+      "模拟"
+    ],
+    "cover": "https://s2.loli.net/2024/02/29/ICZ1sY78XzAltpN.jpg",
+    "excerpt": "前言 外国数字的读法和国内不同，其分割方式为 2,234,911,679 即每三个数为一组，从后向前分别视作 679 911个千 234个万 2个亿 递归模拟 思路分析 ----- 有了以上对数字的分析，我们就会发现，把数字转变为英文写法，无非就是分组后的数字读法 + 数量级(千，万) 对于数字数量级分组，可以采用除法 + 整除的形式； 在数字读法方面，还需",
+    "top": false
+  },
+  {
+    "slug": "LC460-LFU-Cache",
+    "file": "LC460-LFU-Cache.md",
+    "title": "LC.460 LFU-Cache",
+    "date": "2022-06-29",
+    "categories": [
+      "LeetCode"
+    ],
+    "tags": [
+      "Daily algorithm problem solving",
+      "链表",
+      "红黑树",
+      "哈希表"
+    ],
+    "cover": "https://s2.loli.net/2024/02/29/4SYiG3dFeHmAtIX.png",
+    "excerpt": "前言 缓存算法 ----- 缓存算法是指令的一个明细表，用于提示计算设备的缓存信息中哪些条目应该被删去。常见类型包括LFU、LRU、ARC、FIFO、MRU。 本文中将介绍LRU缓存和LFU缓存。 最近最少使用算法(LRU) 介绍 ----- LRU是Least Recently Used的缩写，即最近最少使用，是一种常用的页面置换算法，选择最近最久未使用的",
+    "top": false
+  },
+  {
+    "slug": "CodeForces-Global-Round-20",
+    "file": "CodeForces-Global-Round-20.md",
+    "title": "CodeForces Global Round 20",
+    "date": "2022-06-23",
+    "categories": [
+      "CodeForces"
+    ],
+    "tags": [
+      "CodeForces Contest",
+      "模拟",
+      "贪心"
+    ],
+    "cover": "https://s2.loli.net/2024/02/29/1xVl7XzoFHGeIJj.png",
+    "excerpt": "MY SUBMISSONS: > Problems AC: 4 > Problems Try: 6 > Wrong Answer: 4 Problem A：Log Chopping 题意分析 ----- 两人做游戏，一次性把一块大于等于2的木板劈成两块，直到无法再劈的人为失败 无论怎么样劈，一块长度为n的木板可劈n - 1次 由于errorgorn先起手，则",
+    "top": false
+  },
+  {
+    "slug": "AtCoder-Beginner-Contest-256",
+    "file": "AtCoder-Beginner-Contest-256.md",
+    "title": "Tokio Marine & Nichido Fire Insurance Programming Contest 2022（AtCoder Beginner Contest 256)",
+    "date": "2022-06-21",
+    "categories": [
+      "AtCoder"
+    ],
+    "tags": [
+      "Atcoder Contest",
+      "快速幂",
+      "模拟",
+      "暴力",
+      "线段树"
+    ],
+    "cover": "https://s2.loli.net/2024/02/29/aBLNA3vhMZIR4T9.jpg",
+    "excerpt": "MY SUBMISSIONS: > Problems AC: 5 > Problems Try: 6 > Wrong Answer: 6 Problem A：A - 2^N 题意分析 ----- 给定一个整数N返回2^N^ 数据量较小，直接调用pow()即可 注意要使用long long类型作为答案返回 参考代码 ----- Problem B：B - Ba",
+    "top": false
+  },
+  {
+    "slug": "LC51-N-Queens",
+    "file": "LC51-N-Queens.md",
+    "title": "LC.51 N-Queens",
+    "date": "2022-06-18",
+    "categories": [
+      "LeetCode"
+    ],
+    "tags": [
+      "Daily algorithm problem solving",
+      "回溯算法"
+    ],
+    "cover": "https://img1.sycdn.imooc.com/5cf76da60001fef010220522.jpg",
+    "excerpt": "前言 本题是Eight Queens的衍生题 八皇后问题（英文：Eight queens），是由国际象棋棋手马克斯·贝瑟尔于1848年提出的问题 问题表述为：在8×8格的国际象棋上摆放8个皇后，使其不能互相攻击，即任意两个皇后都不能处于同一行、同一列或同一斜线上，问有多少种摆法。 本题将Eight Queens扩展为N Queens ----- 朴素回溯法 ",
+    "top": false
   }
 ]
