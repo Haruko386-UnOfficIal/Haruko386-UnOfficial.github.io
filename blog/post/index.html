@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Haruko386 的博客文章。">
+  <title>文章 | Haruko386</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+</head>
+<body data-blog-root="../" data-page="post">
+  <header data-site-header></header>
+  <section class="hero hero-compact" id="postHero" style="--hero-image:url('../static/background.jpeg')">
+    <div class="hero-mask"></div>
+    <div class="hero-content">
+      <h1 class="hero-title post-hero-title" id="postTitle">文章</h1>
+      <div class="post-hero-meta" id="postMeta"></div>
+    </div>
+  </section>
+
+  <main class="article-shell">
+    <section class="board article-board">
+      <div class="article-grid">
+        <article class="markdown-body" id="postBody"><div class="article-loading">正在读取文章…</div></article>
+        <aside class="toc" id="toc" aria-label="文章目录"></aside>
+      </div>
+      <div class="article-tags" id="postTags"></div>
+      <div class="article-note">本文由 Haruko386 创作；如需转载，请保留原文链接与作者信息。</div>
+    </section>
+  </main>
+
+  <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button>
+  <footer class="site-footer" data-site-footer></footer>
+  <script src="../app.js"></script>
+  <script>
+    (function () {
+      var slug = new URLSearchParams(location.search).get('p');
+      var body = document.getElementById('postBody');
+      if (!slug) { body.innerHTML = '<p class="error-state">没有指定文章。</p>'; return; }
+
+      function renderToc() {
+        var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3'));
+        var toc = document.getElementById('toc');
+        if (headings.length < 2) { toc.hidden = true; return; }
+        headings.forEach(function (heading, index) { heading.id = 'section-' + (index + 1); });
+        toc.innerHTML = '<div class="toc-title">目录</div>' + headings.map(function (heading) {
+          return '<a class="level-' + heading.tagName.slice(1) + '" href="#' + heading.id + '">' + Blog.escapeHtml(heading.textContent) + '</a>';
+        }).join('');
+        var tocLinks = toc.querySelectorAll('a');
+        if ('IntersectionObserver' in window) {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              tocLinks.forEach(function (link) { link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id); });
+            });
+          }, { rootMargin: '-15% 0px -75%' });
+          headings.forEach(function (heading) { observer.observe(heading); });
+        }
+      }
+
+      Blog.loadPosts().then(function (posts) {
+        var post = posts.find(function (item) { return item.slug === slug; });
+        if (!post) throw new Error('没有找到这篇文章。');
+        document.title = post.title + ' | Haruko386';
+        document.getElementById('postTitle').textContent = post.title;
+        document.getElementById('postMeta').innerHTML =
+          (post.date ? '<span>▣ ' + Blog.escapeHtml(post.date) + '</span>' : '') +
+          (post.categories || []).map(function (category) { return '<span>◇ ' + Blog.escapeHtml(category) + '</span>'; }).join('');
+        document.getElementById('postTags').innerHTML = (post.tags || []).map(function (tag) {
+          return '<span class="article-tag"># ' + Blog.escapeHtml(tag) + '</span>';
+        }).join('');
+        if (post.cover) document.getElementById('postHero').style.setProperty('--hero-image', 'url("' + post.cover.replace(/["\\]/g, '') + '")');
+
+        return fetch('../posts/' + encodeURIComponent(post.file), { cache: 'no-cache' }).then(function (response) {
+          if (!response.ok) throw new Error('文章正文加载失败（' + response.status + '）');
+          return response.text();
+        });
+      }).then(function (markdown) {
+        markdown = markdown.replace(/^\uFEFF?---\s*\r?\n[\s\S]*?\r?\n---\s*(?:\r?\n|$)/, '');
+        marked.setOptions({ gfm: true, breaks: false });
+        body.innerHTML = marked.parse(markdown);
+        renderToc();
+      }).catch(function (error) { body.innerHTML = '<p class="error-state">' + Blog.escapeHtml(error.message) + '</p>'; });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Haruko386 的个人博客：算法、计算机科学与生活记录。">
+  <title>Haruko386 の blog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-blog-root="./" data-page="home">
+  <header data-site-header></header>
+
+  <section class="hero hero-home" style="--hero-image:url('static/background.jpeg')">
+    <div class="hero-mask"></div>
+    <div class="hero-content">
+      <h1 class="hero-title" aria-label="ようこそ"><span id="typingText"></span><span class="typing-cursor">_</span></h1>
+      <p>记录 · 分享 · 思考</p>
+    </div>
+    <a class="scroll-down" id="scrollDown" href="#board" aria-label="查看文章">⌄</a>
+  </section>
+
+  <main class="page-shell home-shell">
+    <section class="board post-board" id="board" aria-live="polite">
+      <div class="loading-state" id="postList">正在读取文章…</div>
+      <nav class="pagination" id="pagination" aria-label="文章分页"></nav>
+    </section>
+  </main>
+
+  <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button>
+  <footer class="site-footer" data-site-footer></footer>
+  <script src="app.js"></script>
+  <script>
+    (function () {
+      var text = 'ようこそ';
+      var target = document.getElementById('typingText');
+      var index = 0;
+      function type() {
+        if (index < text.length) { target.textContent += text.charAt(index++); window.setTimeout(type, 135); }
+      }
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) target.textContent = text;
+      else type();
+
+      var scrollDown = document.getElementById('scrollDown');
+      var board = document.getElementById('board');
+      function syncHomeState() { document.body.classList.toggle('home-content-raised', window.scrollY > 2); }
+      syncHomeState();
+      window.addEventListener('scroll', syncHomeState, { passive: true });
+      scrollDown.addEventListener('click', function (event) {
+        event.preventDefault();
+        document.body.classList.add('home-content-raised');
+        window.requestAnimationFrame(function () {
+          var nav = document.getElementById('navbar');
+          var offset = nav ? nav.getBoundingClientRect().height : 52;
+          var top = board.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        });
+      });
+
+      var pageSize = 8;
+      var currentPage = Math.max(1, Number(new URLSearchParams(location.search).get('page')) || 1);
+      var listNode = document.getElementById('postList');
+      var pagination = document.getElementById('pagination');
+
+      function meta(post) {
+        var bits = [];
+        if (post.date) bits.push('<span class="meta-item meta-date">' + Blog.escapeHtml(post.date) + '</span>');
+        (post.categories || []).forEach(function (category) {
+          bits.push('<span class="meta-item meta-category">' + Blog.escapeHtml(category) + '</span>');
+        });
+        (post.tags || []).slice(0, 3).forEach(function (tag) {
+          bits.push('<span class="meta-item meta-tag">#' + Blog.escapeHtml(tag) + '</span>');
+        });
+        return bits.join('');
+      }
+
+      function render(posts) {
+        var pages = Math.max(1, Math.ceil(posts.length / pageSize));
+        currentPage = Math.min(currentPage, pages);
+        var visible = posts.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+        if (!visible.length) { listNode.className = 'empty-state'; listNode.textContent = '暂时还没有文章。'; return; }
+        listNode.className = 'post-list';
+        listNode.innerHTML = visible.map(function (post) {
+          var url = Blog.postUrl(post);
+          var image = post.cover ? '<a class="post-cover" href="' + url + '" aria-hidden="true" tabindex="-1"><img src="' + Blog.escapeHtml(post.cover) + '" alt="" loading="lazy" onerror="this.closest(\'.post-cover\').classList.add(\'image-failed\')"></a>' : '<a class="post-cover cover-placeholder" href="' + url + '" aria-hidden="true" tabindex="-1"></a>';
+          return '<article class="post-card">' + image + '<div class="post-summary">' +
+            '<h2><a href="' + url + '">' + Blog.escapeHtml(post.title) + '</a></h2>' +
+            '<p>' + Blog.escapeHtml(post.excerpt || '点击阅读全文。') + '</p>' +
+            '<div class="post-meta">' + meta(post) + '</div></div></article>';
+        }).join('');
+
+        pagination.innerHTML = pages <= 1 ? '' : Array.from({ length: pages }, function (_, i) {
+          var page = i + 1;
+          return '<a class="page-link' + (page === currentPage ? ' active' : '') + '" href="?page=' + page + '"' + (page === currentPage ? ' aria-current="page"' : '') + '>' + page + '</a>';
+        }).join('');
+      }
+
+      Blog.loadPosts().then(render).catch(function (error) { listNode.className = 'error-state'; listNode.textContent = error.message; });
+    })();
+  </script>
+</body>
+</html>

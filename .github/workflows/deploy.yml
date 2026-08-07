@@ -24,6 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Generate blog index
+        run: node scripts/generate-posts.mjs
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

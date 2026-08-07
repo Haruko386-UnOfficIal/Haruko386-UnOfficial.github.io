@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>标签 | Haruko386</title><link rel="stylesheet" href="../style.css"></head>
+<body data-blog-root="../" data-page="tags">
+  <header data-site-header></header>
+  <section class="hero hero-compact" style="--hero-image:url('../static/background.jpeg')"><div class="hero-mask"></div><div class="hero-content"><h1 class="hero-title">标签</h1><p>文章里的关键词</p></div></section>
+  <main class="page-shell simple-shell"><section class="board page-board"><h2 class="page-title">文章标签</h2><div id="content" class="loading-state">正在读取标签…</div></section></main>
+  <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button><footer class="site-footer" data-site-footer></footer><script src="../app.js"></script>
+  <script>
+    Blog.loadPosts().then(function (posts) {
+      var selected = new URLSearchParams(location.search).get('t');
+      var counts = {};
+      posts.forEach(function (post) { (post.tags || []).forEach(function (item) { counts[item] = (counts[item] || 0) + 1; }); });
+      var names = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+      var html = '<div class="profile-links">' + names.map(function (name) { return '<a href="?t=' + encodeURIComponent(name) + '"># ' + Blog.escapeHtml(name) + ' · ' + counts[name] + '</a>'; }).join('') + '</div>';
+      if (selected) html += '<section class="archive-group" style="margin-top:34px"><div class="archive-year"># ' + Blog.escapeHtml(selected) + '</div>' + posts.filter(function (post) { return (post.tags || []).indexOf(selected) >= 0; }).map(function (post) { return '<div class="archive-row"><time>' + Blog.escapeHtml(post.date) + '</time><a href="' + Blog.postUrl(post) + '">' + Blog.escapeHtml(post.title) + '</a></div>'; }).join('') + '</section>';
+      var node = document.getElementById('content'); node.className = ''; node.innerHTML = html;
+    });
+  </script>
+</body></html>

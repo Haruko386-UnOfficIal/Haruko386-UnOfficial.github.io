@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>链接 | Haruko386</title><link rel="stylesheet" href="../style.css">
+</head>
+<body data-blog-root="../" data-page="links">
+  <header data-site-header></header>
+  <section class="hero hero-compact" style="--hero-image:url('../static/background.jpeg')"><div class="hero-mask"></div><div class="hero-content"><h1 class="hero-title">链接</h1><p>有趣的人与好用的工具</p></div></section>
+  <main class="page-shell simple-shell"><section class="board page-board"><h2 class="page-title">友情链接</h2><div class="links-grid" id="linksGrid"></div></section></main>
+  <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button><footer class="site-footer" data-site-footer></footer>
+  <script src="../app.js"></script>
+  <script>
+    var links = [
+      { name: 'dianhsuのblog', url: 'https://www.dianhsu.com/', desc: 'Fluid 风格参考博客' },
+      { name: 'Fomalhaut', url: 'https://www.fomal.cc/', desc: 'Future is now' },
+      { name: 'konng', url: 'https://wikif.vercel.app/', desc: 'Waiting is a lost art' },
+      { name: '宫水三叶', url: 'https://sharingsource.github.io/', desc: '刷题日记' },
+      { name: 'DeepL', url: 'https://www.deepl.com/translator', desc: '翻译工具' },
+      { name: 'Clist', url: 'https://clist.by/', desc: '算法竞赛日程聚合' }
+    ];
+    document.getElementById('linksGrid').innerHTML = links.map(function (link) {
+      return '<a class="link-card" href="' + link.url + '" target="_blank" rel="noopener"><div><div class="link-name">' + Blog.escapeHtml(link.name) + '</div><div class="link-desc">' + Blog.escapeHtml(link.desc) + '</div></div></a>';
+    }).join('');
+  </script>
+</body>
+</html>
