@@ -15,6 +15,22 @@
     "top": true
   },
   {
+    "slug": "My-thought-about-AI",
+    "file": "My-thought-about-AI.md",
+    "title": "AI时代，我存在的意义是什么？",
+    "date": "2026-08-08",
+    "categories": [
+      "Diary"
+    ],
+    "tags": [
+      "AI",
+      "Vibe Coding"
+    ],
+    "cover": "static/banner/2026-08-08-1.jpg",
+    "excerpt": "前言 旧博客之前被我关掉了，现在想重启博客这部分内容，但又不想直接再回hexo上重写搭了；最近正好买了个域名，那就直接复刻好了旧博客，在这里写内容了。下面开始正片 AI 自打chatGPT横空出世，已经快三年了。我作为一个从openai一出名就开始用AI的计算机学生，我想在这里写写我对于AI的看法。 AI的实力 我记得最开始AI出现的时候，那时候我似乎还在零",
+    "top": false
+  },
+  {
     "slug": "Graduation",
     "file": "Graduation.md",
     "title": "毕业季的一些感慨",
@@ -25,6 +41,43 @@
     "tags": [],
     "cover": "https://s2.loli.net/2024/05/11/zFPrk7deUCL6jTg.jpg",
     "excerpt": "初夏 一转眼，大学的生活已经走到了结尾。今天收到了研究生录取调档函，原来不知不觉中考研那件似乎远在天边的事情也已经是昨天了事情了呀。 我看有人问：“四年前刚进入大学的你看到现在的你，那么四年前的你会怎么评价现在的你？” 我猜，那时候的我一定会说：“废物，四年就混了个这？别的不说，单拿出你考研，最后就整了个调剂上岸？调剂上岸能叫成功吗？” 根据我对我自己的了解",
+    "top": false
+  },
+  {
+    "slug": "KMP",
+    "file": "KMP.md",
+    "title": "KMP算法",
+    "date": "2023-06-29",
+    "categories": [],
+    "tags": [],
+    "cover": "https://cdn.dianhsu.com/img/2023-06-07-18-17-53.jpg",
+    "excerpt": "一、模板类别 ​ 序列：KMP 。 二、模板功能 1.构造 KMP 数组 数据类型 模板参数 typename Tp ，表示序列中的元素类型，对于字符串问题，即为 char。 构造参数 Iterator first ，表示模式序列开始位置。 构造参数 Iterator last ，表示模式序列结束位置。（开区间） 时间复杂度 O(n) 。 备注 本模板适用于",
+    "top": false
+  },
+  {
+    "slug": "cantor",
+    "file": "cantor.md",
+    "title": "康托展开",
+    "date": "2023-06-28",
+    "categories": [],
+    "tags": [],
+    "cover": "https://s2.loli.net/2023/06/28/XjTFgYRwmPiqBDN.jpg",
+    "excerpt": "参考：康拓展开维基百科 康拓展开是一个全排列到一个自然数的双射，常用于构建hash表时的空间压缩。 康拓展开的实质是计算当前排列在所有由小到大全排列中的顺序，因此是可逆的。 公式 $X=a0(n-1)!+a1(n-2)!+...+a{n-1}.0!$ 其中ai为整数，并且 $0≤ai<i,1≤i<n$ ai的意义参见举例中的解释部分 举例 例如，3 5 7 ",
+    "top": false
+  },
+  {
+    "slug": "2023",
+    "file": "2023.md",
+    "title": "Good Bye 2022, 2023 is NEAR",
+    "date": "2022-12-31",
+    "categories": [
+      "Q&A"
+    ],
+    "tags": [
+      "Quention & Answer"
+    ],
+    "cover": "https://s2.loli.net/2022/12/31/VGAEBFKcoCzrLDy.jpg",
+    "excerpt": "章节 ----- 今天是2022的最后一天了，也是想写一篇年度总结，回忆回忆这一年所做的 一些事情 2022是静默时代的最后一年，作为学生的我是有很大的印象的 2022春季开学季因为山西的本地疫情和北京疫情，导致整个学期就没有去学校；下半学期虽然去了学校，但还是封校+每日核酸检测，年底时因为疫情还是提前遣返回家了 我回忆着高三那时候，每每做题做累了，就会想象",
     "top": false
   },
   {
@@ -60,6 +113,21 @@
     ],
     "cover": "https://s2.loli.net/2022/10/26/ynHm4gTl317wvBa.png",
     "excerpt": "前言: 所有模板仅仅为笔者自己在算竞中用到的模板 由于笔者竞赛分都很低，高级模板还请前往查看oldyan的算竞模板 数学 最大公约数 ---------- 最小公倍数 --------- 快速幂 ------------- 快速判断质数 ---------- 根据三点获取角度 图论 并查集 ----- BellmanFord ----------------",
+    "top": false
+  },
+  {
+    "slug": "MySql",
+    "file": "MySql.md",
+    "title": "MySQL基本语句必知必会",
+    "date": "2022-10-18",
+    "categories": [
+      "MySql"
+    ],
+    "tags": [
+      "MySql"
+    ],
+    "cover": "",
+    "excerpt": "前言 此内容为笔者自己总结的，最初的MySql语句的用法和细节 部分简单语句可能会无语法说明 全局解释 []表示该部分内容是可选的 1.表的创建 ---------- 创建新表 语法说明 TEMPORARY表示创建临时表 IF NOT EXISTS表示不存在则创建新表 tablename表示表的名字 columndefinition字段定义，包括数据类型，字",
     "top": false
   },
   {
@@ -112,6 +180,21 @@
     ],
     "cover": "https://s2.loli.net/2022/10/24/mLvdNHeWE5PYTfO.jpg",
     "excerpt": "计算机网络体系结构 计算机网络概述 计算机网络 概念 组成 功能 数据通信 资源共享 分布式处理 提高可靠性 负载均衡 分类 分布范围 广域网 城域网 局域网 个人区域网 传输技术 广播式网络 点对点网络 拓扑结构 星形 总线形 环形 网状形 使用者 公用网 专用网 交换技术 电路交换 报文交换 分组交换 传输介质 有线 无线 标准化工作及相关组织 性能指标",
+    "top": false
+  },
+  {
+    "slug": "funwebsite-share",
+    "file": "funwebsite-share.md",
+    "title": "分享几个实用且有趣的网站",
+    "date": "2022-09-16",
+    "categories": [
+      "Q&A"
+    ],
+    "tags": [
+      "Quention & Answer"
+    ],
+    "cover": "https://s1.328888.xyz/2022/09/16/cpZA0.jpg",
+    "excerpt": "前言 ----- 在此分享一些日常使用的摸鱼，实用的网站，希望对看到的小伙伴有帮助。 网站及介绍 ----- 网上冲浪🏄‍ 仅限于Edge浏览器，控制小人冲浪，获得最高分 Ubuntu Pastebin 贴代码网站，可以生成你代码的链接，方便分享代码给他人看时，文本内容有合理的格式化 Text to ASCII Art Generator 文本转为艺术字A",
     "top": false
   },
   {
@@ -377,6 +460,17 @@
     ],
     "cover": "https://img1.sycdn.imooc.com/5cf76da60001fef010220522.jpg",
     "excerpt": "前言 本题是Eight Queens的衍生题 八皇后问题（英文：Eight queens），是由国际象棋棋手马克斯·贝瑟尔于1848年提出的问题 问题表述为：在8×8格的国际象棋上摆放8个皇后，使其不能互相攻击，即任意两个皇后都不能处于同一行、同一列或同一斜线上，问有多少种摆法。 本题将Eight Queens扩展为N Queens ----- 朴素回溯法 ",
+    "top": false
+  },
+  {
+    "slug": "LRU，LFU缓存分析",
+    "file": "LRU，LFU缓存分析.md",
+    "title": "LRU，LFU缓存分析",
+    "date": "",
+    "categories": [],
+    "tags": [],
+    "cover": "",
+    "excerpt": "LRU缓存 LRU（The Least Recently Used，最近最久未使用算法）是一种常见的缓存算法，在很多分布式缓存系统（如Redis, Memcached）中都有广泛使用。 LRU算法的思想是： 如果一个数据在最近一段时间没有被访问到，那么可以认为在将来它被访问的可能性也很小。当有新的缓存加入时，会优先淘汰被访问可能性最小的数据 算法思路分析 思",
     "top": false
   }
 ]
