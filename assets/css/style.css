@@ -16,10 +16,22 @@
 
 :root {
   --gradient-colors: #fffdf4, #d8eee7, #6bc9c9, #1594b2, #062f6f;
+  --active-gradient-colors: var(--gradient-colors);
   --gradient-speed: 20s;
   --text: #102b37;
   --muted: rgba(16, 43, 55, 0.66);
   --line: rgba(255, 255, 255, 0.48);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --active-gradient-colors: #010208, #050b1a, #111234, #07182d, #02030b;
+    --text: #eef5ff;
+    --muted: rgba(220, 232, 249, 0.72);
+    --line: rgba(185, 210, 255, 0.3);
+    color-scheme: dark;
+  }
 }
 
 *,
@@ -33,9 +45,11 @@ html {
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
+  background: #eef8f8;
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -44,11 +58,67 @@ body {
 .gradient-background {
   position: fixed;
   inset: -18%;
-  z-index: -1;
-  background: linear-gradient(120deg, var(--gradient-colors));
+  z-index: 0;
+  background: linear-gradient(120deg, var(--active-gradient-colors));
   background-size: 350% 350%;
   filter: saturate(108%);
   animation: gradient-flow var(--gradient-speed) ease-in-out infinite;
+}
+
+.galaxy {
+  position: fixed;
+  inset: -30%;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: rotate(-19deg) scale(1.08);
+  transform-origin: center;
+  background:
+    radial-gradient(ellipse 70% 15% at 50% 50%, rgba(246, 244, 255, 0.17) 0%, rgba(151, 174, 255, 0.15) 24%, rgba(84, 92, 184, 0.08) 52%, transparent 84%),
+    radial-gradient(ellipse 59% 24% at 50% 50%, rgba(76, 109, 193, 0.1), rgba(76, 55, 145, 0.055) 48%, transparent 86%);
+  filter: blur(10px);
+  -webkit-mask-image: radial-gradient(ellipse 74% 42% at 50% 50%, #000 0%, rgba(0, 0, 0, 0.96) 38%, rgba(0, 0, 0, 0.58) 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse 74% 42% at 50% 50%, #000 0%, rgba(0, 0, 0, 0.96) 38%, rgba(0, 0, 0, 0.58) 68%, transparent 100%);
+  will-change: transform, opacity;
+}
+
+.galaxy::before,
+.galaxy::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.galaxy::before {
+  inset: 26% 2%;
+  background:
+    radial-gradient(ellipse at 18% 52%, rgba(117, 159, 241, 0.2), transparent 27%),
+    radial-gradient(ellipse at 34% 44%, rgba(212, 221, 255, 0.17), transparent 24%),
+    radial-gradient(ellipse at 51% 50%, rgba(255, 225, 191, 0.19), transparent 25%),
+    radial-gradient(ellipse at 67% 55%, rgba(170, 145, 237, 0.17), transparent 26%),
+    radial-gradient(ellipse at 84% 46%, rgba(96, 141, 229, 0.16), transparent 29%),
+    linear-gradient(180deg, transparent 34%, rgba(1, 3, 14, 0.23) 49%, transparent 65%);
+  filter: blur(28px);
+}
+
+.galaxy::after {
+  inset: 36% 5%;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(255, 238, 208, 0.15), transparent 34%),
+    linear-gradient(90deg, transparent 0%, rgba(102, 140, 230, 0.06) 18%, rgba(221, 226, 255, 0.14) 48%, rgba(155, 119, 221, 0.07) 76%, transparent 100%);
+  filter: blur(15px);
+  mix-blend-mode: screen;
+}
+
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .gradient-background::after {
@@ -62,6 +132,8 @@ body {
 }
 
 .home {
+  position: relative;
+  z-index: 3;
   width: min(92vw, 680px);
   min-height: 100vh;
   margin: 0 auto;
@@ -71,6 +143,37 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #010208;
+  }
+
+  .gradient-background {
+    filter: saturate(118%) contrast(108%);
+  }
+
+  .gradient-background::after {
+    background:
+      radial-gradient(circle at 20% 22%, rgba(70, 104, 190, 0.2), transparent 30%),
+      radial-gradient(circle at 78% 68%, rgba(78, 42, 135, 0.22), transparent 34%),
+      radial-gradient(circle at 48% 46%, rgba(7, 48, 82, 0.16), transparent 42%);
+  }
+
+  .galaxy {
+    opacity: 0.74;
+    animation: galaxy-drift 32s ease-in-out infinite alternate;
+  }
+
+  body .avatar {
+    border-color: rgba(203, 221, 255, 0.66);
+    box-shadow: 0 16px 52px rgba(30, 82, 160, 0.3);
+  }
+
+  body .links a:not(:last-child)::after {
+    color: rgba(214, 228, 255, 0.42);
+  }
 }
 
 .avatar {
@@ -171,6 +274,15 @@ code {
   }
 }
 
+@keyframes galaxy-drift {
+  from {
+    transform: rotate(-19deg) scale(1.08) translate3d(-1.2%, -0.5%, 0);
+  }
+  to {
+    transform: rotate(-17.5deg) scale(1.12) translate3d(1.3%, 0.7%, 0);
+  }
+}
+
 @media (max-width: 520px) {
   .links {
     max-width: 340px;
@@ -183,7 +295,8 @@ code {
 
 @media (prefers-reduced-motion: reduce) {
   .gradient-background,
-  .gradient-background::after {
+  .gradient-background::after,
+  .galaxy {
     animation: none;
   }
 
