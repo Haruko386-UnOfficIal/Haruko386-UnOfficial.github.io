@@ -2,15 +2,17 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>归档 | Haruko386</title><link rel="stylesheet" href="../style.css">
+  <title>归档 | Haruko386</title><script src="../theme.js"></script><link rel="stylesheet" href="../style.css">
 </head>
 <body data-blog-root="../" data-page="archives">
   <header data-site-header></header>
-  <section class="hero hero-compact" style="--hero-image:url('../static/background.jpeg')"><div class="hero-mask"></div><div class="hero-content"><h1 class="hero-title">归档</h1><p>时光留下的文章</p></div></section>
+  <section class="hero hero-compact" style="--hero-image:url('static/archives.jpg')"><div class="hero-mask"></div><div class="hero-content"><h1 class="hero-title">归档</h1><p>2022-<span id="archiveEndYear"></span></p></div></section>
   <main class="page-shell simple-shell"><section class="board page-board"><h2 class="page-title">文章归档</h2><div id="archives" class="loading-state">正在整理时间线…</div></section></main>
   <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button><footer class="site-footer" data-site-footer></footer>
   <script src="../app.js"></script>
   <script>
+    document.getElementById('archiveEndYear').textContent = new Date().getFullYear();
+
     Blog.loadPosts().then(function (posts) {
       var groups = {};
       posts.forEach(function (post) { var year = post.date ? post.date.slice(0, 4) : '未注明'; (groups[year] || (groups[year] = [])).push(post); });

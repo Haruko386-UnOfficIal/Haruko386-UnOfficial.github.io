@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Haruko386 的个人博客：算法、计算机科学与生活记录。">
   <title>Haruko386 の blog</title>
+  <script src="theme.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-blog-root="./" data-page="home">
@@ -14,7 +15,6 @@
     <div class="hero-mask"></div>
     <div class="hero-content">
       <h1 class="hero-title" aria-label="ようこそ"><span id="typingText"></span><span class="typing-cursor">_</span></h1>
-      <p>记录 · 分享 · 思考</p>
     </div>
     <a class="scroll-down" id="scrollDown" href="#board" aria-label="查看文章">⌄</a>
   </section>
@@ -43,23 +43,27 @@
       var scrollDown = document.getElementById('scrollDown');
       var board = document.getElementById('board');
       function syncHomeState() { document.body.classList.toggle('home-content-raised', window.scrollY > 2); }
-      syncHomeState();
-      window.addEventListener('scroll', syncHomeState, { passive: true });
-      scrollDown.addEventListener('click', function (event) {
-        event.preventDefault();
+      function scrollToBoard(behavior) {
         document.body.classList.add('home-content-raised');
         window.requestAnimationFrame(function () {
           var nav = document.getElementById('navbar');
           var offset = nav ? nav.getBoundingClientRect().height : 52;
           var top = board.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top: top, behavior: 'smooth' });
+          window.scrollTo({ top: top, behavior: behavior || 'smooth' });
         });
+      }
+      syncHomeState();
+      window.addEventListener('scroll', syncHomeState, { passive: true });
+      scrollDown.addEventListener('click', function (event) {
+        event.preventDefault();
+        scrollToBoard('smooth');
       });
 
       var pageSize = 8;
       var currentPage = Math.max(1, Number(new URLSearchParams(location.search).get('page')) || 1);
       var listNode = document.getElementById('postList');
       var pagination = document.getElementById('pagination');
+      var postsCache = [];
 
       function meta(post) {
         var bits = [];
@@ -90,11 +94,34 @@
 
         pagination.innerHTML = pages <= 1 ? '' : Array.from({ length: pages }, function (_, i) {
           var page = i + 1;
-          return '<a class="page-link' + (page === currentPage ? ' active' : '') + '" href="?page=' + page + '"' + (page === currentPage ? ' aria-current="page"' : '') + '>' + page + '</a>';
+          return '<a class="page-link' + (page === currentPage ? ' active' : '') + '" data-page="' + page + '" href="?page=' + page + '#board"' + (page === currentPage ? ' aria-current="page"' : '') + '>' + page + '</a>';
         }).join('');
       }
 
-      Blog.loadPosts().then(render).catch(function (error) { listNode.className = 'error-state'; listNode.textContent = error.message; });
+      pagination.addEventListener('click', function (event) {
+        var link = event.target.closest('a[data-page]');
+        if (!link) return;
+        event.preventDefault();
+        currentPage = Number(link.dataset.page) || 1;
+        render(postsCache);
+        var url = new URL(location.href);
+        url.searchParams.set('page', currentPage);
+        url.hash = 'board';
+        history.pushState({ page: currentPage }, '', url.pathname + url.search + url.hash);
+        scrollToBoard('smooth');
+      });
+
+      window.addEventListener('popstate', function () {
+        currentPage = Math.max(1, Number(new URLSearchParams(location.search).get('page')) || 1);
+        render(postsCache);
+        if (currentPage > 1 || location.hash === '#board') scrollToBoard('auto');
+      });
+
+      Blog.loadPosts().then(function (posts) {
+        postsCache = posts;
+        render(postsCache);
+        if (currentPage > 1 || location.hash === '#board') scrollToBoard('auto');
+      }).catch(function (error) { listNode.className = 'error-state'; listNode.textContent = error.message; });
     })();
   </script>
 </body>
