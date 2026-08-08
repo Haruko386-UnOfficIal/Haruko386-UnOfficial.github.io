@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Allura Local";
+  src: url("../fonts/Allura-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bodoni Moda Local";
+  src: url("../fonts/BodoniModa-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+}
+
 :root {
   --gradient-colors: #fffdf4, #d8eee7, #6bc9c9, #1594b2, #062f6f;
   --gradient-speed: 20s;
@@ -69,17 +85,18 @@ body {
 
 h1 {
   margin: 18px 0 4px;
-  font-family: "Segoe Script", "Brush Script MT", "Comic Sans MS", cursive;
+  font-family: "Allura Local", "Segoe Script", "Apple Chancery",
+    "URW Chancery L", "Brush Script MT", cursive;
   font-size: clamp(2rem, 5vw, 3.1rem);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.18;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.01em;
   text-wrap: balance;
 }
 
 .tagline {
   margin: 8px 0 30px;
-  font-family: "Bodoni Moda", cursive;
+  font-family: "Bodoni Moda Local", "Bodoni 72", Didot, "Times New Roman", serif;
   color: var(--muted);
   font-size: clamp(1rem, 2vw, 1.15rem);
 }
