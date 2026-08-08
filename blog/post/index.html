@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Haruko386 的博客文章。">
   <title>文章 | Haruko386</title>
+  <script src="../theme.js"></script>
   <link rel="stylesheet" href="../style.css">
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 </head>
 <body data-blog-root="../" data-page="post">
   <header data-site-header></header>
@@ -79,6 +81,9 @@
         markdown = markdown.replace(/^\uFEFF?---\s*\r?\n[\s\S]*?\r?\n---\s*(?:\r?\n|$)/, '');
         marked.setOptions({ gfm: true, breaks: false });
         body.innerHTML = marked.parse(markdown);
+        if (window.hljs) {
+          body.querySelectorAll('pre code').forEach(function (block) { window.hljs.highlightElement(block); });
+        }
         renderToc();
       }).catch(function (error) { body.innerHTML = '<p class="error-state">' + Blog.escapeHtml(error.message) + '</p>'; });
     })();

@@ -7,18 +7,67 @@
   --accent: #30a9de;
   --line: #e8ebef;
   --code-bg: #f5f7f9;
+  --code-block-bg: #f6f8fa;
+  --code-block-text: #273142;
+  --code-border: #dfe4ea;
+  --code-comment: #6e7781;
+  --code-keyword: #cf222e;
+  --code-string: #0a6b4f;
+  --code-number: #0550ae;
+  --code-title: #8250df;
+  --code-built-in: #953800;
+  --code-variable: #953800;
+  --code-meta: #1f6feb;
+  --code-deletion: #82071e;
   --shadow: 0 10px 24px rgba(31, 45, 61, .16), 0 20px 54px rgba(31, 45, 61, .13);
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page-bg: #181d25;
+  --card-bg: #252d38;
+  --nav-bg: rgba(31, 49, 68, .97);
+  --text: #d5d9de;
+  --muted: #a7afb8;
+  --line: #3c4858;
+  --code-bg: #303946;
+  --code-block-bg: #222a35;
+  --code-block-text: #d8dee9;
+  --code-border: #3d4857;
+  --code-comment: #8b949e;
+  --code-keyword: #ff7b72;
+  --code-string: #a5d6ff;
+  --code-number: #79c0ff;
+  --code-title: #d2a8ff;
+  --code-built-in: #ffa657;
+  --code-variable: #ffa657;
+  --code-meta: #79c0ff;
+  --code-deletion: #ffa198;
+  --shadow: 0 12px 35px rgba(0, 0, 0, .32);
+}
+:root[data-theme="light"] { color-scheme: light; }
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --page-bg: #181d25;
     --card-bg: #252d38;
     --nav-bg: rgba(31, 49, 68, .97);
     --text: #d5d9de;
     --muted: #a7afb8;
     --line: #3c4858;
-    --code-bg: #1f2630;
+    --code-bg: #303946;
+    --code-block-bg: #222a35;
+    --code-block-text: #d8dee9;
+    --code-border: #3d4857;
+    --code-comment: #8b949e;
+    --code-keyword: #ff7b72;
+    --code-string: #a5d6ff;
+    --code-number: #79c0ff;
+    --code-title: #d2a8ff;
+    --code-built-in: #ffa657;
+    --code-variable: #ffa657;
+    --code-meta: #79c0ff;
+    --code-deletion: #ffa198;
     --shadow: 0 12px 35px rgba(0, 0, 0, .32);
   }
 }
@@ -31,6 +80,7 @@ body {
   background: var(--page-bg);
   font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: color .25s ease, background-color .25s ease;
 }
 a { color: inherit; text-decoration: none; transition: color .2s ease; }
 a:hover { color: var(--accent); }
@@ -83,6 +133,21 @@ button, input { font: inherit; }
 }
 .navbar-links a:hover, .navbar-links a.active { color: #fff; }
 .navbar-links a:hover::after, .navbar-links a.active::after { transform: scaleX(1); }
+.theme-toggle {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, .94);
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: color .2s ease, background .2s ease, transform .2s ease;
+}
+.theme-toggle:hover { color: #fff; background: rgba(255, 255, 255, .13); transform: rotate(12deg); }
+.theme-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .navbar-toggle { display: none; padding: 5px; border: 0; background: transparent; }
 .navbar-toggle span { display: block; width: 23px; height: 2px; margin: 5px; border-radius: 2px; background: #fff; }
 
@@ -235,9 +300,40 @@ button, input { font: inherit; }
 .markdown-body img { display: block; height: auto; margin: 22px auto; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,.13); }
 .markdown-body blockquote { padding: 11px 17px; border-left: 4px solid var(--accent); color: var(--muted); background: var(--code-bg); }
 .markdown-body blockquote > :last-child { margin-bottom: 0; }
-.markdown-body code { padding: .15em .36em; border-radius: 3px; background: var(--code-bg); font: .9em/1.5 Consolas, Monaco, monospace; }
-.markdown-body pre { overflow: auto; padding: 16px; border-radius: 5px; background: #282c34; color: #e6e9ed; }
-.markdown-body pre code { padding: 0; color: inherit; background: transparent; }
+.markdown-body code { padding: .15em .38em; border-radius: 3px; background: var(--code-bg); font: .9em/1.5 "SFMono-Regular", Consolas, "Liberation Mono", Monaco, monospace; }
+.markdown-body pre {
+  overflow: auto;
+  margin: 1.2em 0;
+  padding: 18px 20px;
+  border: 1px solid var(--code-border);
+  border-radius: 6px;
+  color: var(--code-block-text);
+  background: var(--code-block-bg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04);
+  scrollbar-color: var(--muted) transparent;
+  transition: color .25s ease, background-color .25s ease, border-color .25s ease;
+}
+.markdown-body pre code {
+  display: block;
+  min-width: max-content;
+  padding: 0;
+  color: var(--code-block-text);
+  background: transparent;
+  font-size: .9rem;
+  line-height: 1.68;
+  tab-size: 4;
+}
+.hljs-comment, .hljs-quote { color: var(--code-comment); font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-type { color: var(--code-keyword); }
+.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute { color: var(--code-string); }
+.hljs-number, .hljs-symbol, .hljs-bullet { color: var(--code-number); }
+.hljs-title, .hljs-section, .hljs-title.function_, .hljs-function .hljs-title { color: var(--code-title); }
+.hljs-built_in, .hljs-builtin-name { color: var(--code-built-in); }
+.hljs-variable, .hljs-template-variable, .hljs-params { color: var(--code-variable); }
+.hljs-meta, .hljs-template-tag, .hljs-doctag { color: var(--code-meta); }
+.hljs-deletion { color: var(--code-deletion); }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: 700; }
 .markdown-body table { display: block; width: max-content; max-width: 100%; overflow: auto; border-collapse: collapse; }
 .markdown-body th, .markdown-body td { padding: 7px 11px; border: 1px solid var(--line); }
 .markdown-body hr { height: 1px; margin: 28px 0; border: 0; background: var(--line); }
@@ -273,6 +369,7 @@ button, input { font: inherit; }
   }
   .navbar-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
   .navbar-links a { text-align: center; }
+  .theme-toggle { justify-self: center; }
   .hero-home { height: 100vh; height: 100svh; min-height: 520px; }
   .hero-compact { height: 330px; }
   .page-shell, .article-shell { width: calc(100% - 24px); }

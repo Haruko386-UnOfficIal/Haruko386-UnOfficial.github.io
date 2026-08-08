@@ -26,21 +26,31 @@
   var header = document.querySelector('[data-site-header]');
   if (header) {
     var items = [
-      ['about', '关于', root + 'about/'],
-      ['archives', '归档', root + 'archives/'],
       ['home', '首页', root],
-      ['links', '链接', root + 'links/']
+      ['archives', '归档', root + 'archives/'],
+      // ['links', '链接', root + 'links/']
     ];
     header.innerHTML = '<nav class="navbar' + (body.classList.contains('has-compact-hero') ? ' navbar-solid' : '') + '" id="navbar">' +
       '<div class="navbar-inner"><a class="navbar-brand" href="' + root + '">Haruko386 の blog</a>' +
       '<button class="navbar-toggle" type="button" aria-label="打开导航" aria-expanded="false"><span></span><span></span><span></span></button>' +
       '<div class="navbar-links">' + items.map(function (item) {
         return '<a' + (active === item[0] ? ' class="active" aria-current="page"' : '') + ' href="' + item[2] + '">' + item[1] + '</a>';
-      }).join('') + '</div></div></nav>';
+      }).join('') + '<button class="theme-toggle" type="button"><span aria-hidden="true"></span></button></div></div></nav>';
 
     var nav = document.getElementById('navbar');
     var toggle = nav.querySelector('.navbar-toggle');
     var links = nav.querySelector('.navbar-links');
+    var themeToggle = nav.querySelector('.theme-toggle');
+    function updateThemeToggle() {
+      var dark = document.documentElement.dataset.theme === 'dark';
+      themeToggle.querySelector('span').textContent = dark ? '☀' : '☾';
+      themeToggle.title = dark ? '切换到日间模式' : '切换到夜间模式';
+      themeToggle.setAttribute('aria-label', themeToggle.title);
+      themeToggle.setAttribute('aria-pressed', String(dark));
+    }
+    updateThemeToggle();
+    themeToggle.addEventListener('click', function () { window.BlogTheme.toggle(); });
+    window.addEventListener('blogthemechange', updateThemeToggle);
     function updateNav() { nav.classList.toggle('scrolled', window.scrollY > 30); }
     updateNav();
     window.addEventListener('scroll', updateNav, { passive: true });
