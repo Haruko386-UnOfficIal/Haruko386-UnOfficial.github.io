@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=180&text=Haruko386&fontAlign=50&fontAlignY=38&descAlignY=60&animation=fadeIn&color=0:ddf6f3,45:9edddb,100:62c2ca&fontColor=FFFFFF" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=180&text=Haruko386&fontFamily=Segoe%20Script%2Ccursive&fontAlign=50&fontAlignY=38&descAlignY=60&animation=fadeIn&color=0:ddf6f3,45:9edddb,100:62c2ca&fontColor=FFFFFF" width="100%" />
 
 <br/>
 
