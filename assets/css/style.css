@@ -205,7 +205,7 @@ h1 {
 }
 
 .links {
-  width: min(100%, 800px);
+  width: min(100%, 600px);
   padding-top: 25px;
   display: flex;
   flex-wrap: wrap;
