@@ -42,6 +42,12 @@ window.galleryImages = [
   }
 ];
 
+// 侧栏最下方的外部链接，显示在最后一个分类之后（留有一段间距）。
+// name 是显示文字，href 是外部地址；留空数组则不显示任何外部链接。
+window.galleryLinks = [
+  { name: 'Gallery', href: 'https://haruko386.github.io/gallery/' },
+];
+
 // 每个对象是一个独立作品集；侧栏根据这里自动生成。
 // id 必须唯一，使用英文字母、数字、短横线；name 是导航名称。
 // view: 'photo' 首屏为单张照片，'archive' 首屏为缩略图目录。

@@ -198,7 +198,7 @@ h1 {
 }
 
 .tagline {
-  margin: 8px 0 30px;
+  margin: 8px 0 15px;
   font-family: "Bodoni Moda Local", "Bodoni 72", Didot, "Times New Roman", serif;
   color: var(--muted);
   font-size: clamp(1rem, 2vw, 1.15rem);

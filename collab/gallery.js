@@ -65,7 +65,16 @@
     link.dataset.collection = collection.id;
     return link;
   });
-  navigation.replaceChildren(...navLinks);
+  const externalLinks = (window.galleryLinks || [])
+    .filter(link => link && typeof link.href === 'string' && link.href.trim())
+    .map(link => {
+      const anchor = document.createElement('a');
+      anchor.className = 'external-link';
+      anchor.href = link.href.trim();
+      anchor.textContent = link.name || link.href;
+      return anchor;
+    });
+  navigation.replaceChildren(...navLinks, ...externalLinks);
   document.querySelector('.home').href = collectionHash(collections[0]);
 
   function route() {
@@ -155,7 +164,7 @@
       count.textContent = '';
       paging.hidden = true;
     }
-    if (!collection.images.length) { showMessage('这个作品集还没有照片'); return; }
+    if (!collection.images.length) { showMessage('This album will soon be available as long as all things going well ;)'); return; }
     photoView.hidden = showingArchive;
     archiveView.hidden = !showingArchive;
     if (showingArchive) {
