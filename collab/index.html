@@ -1,0 +1,52 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Haruko386 — Photographs">
+  <title>Photographs — Haruko386</title>
+  <link rel="icon" href="../blog/assets/fluid.png">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="images.js"></script>
+  <script defer src="gallery.js"></script>
+</head>
+
+<body>
+  <div class="page">
+    <header class="header">
+      <a class="home" href="#" aria-label="Haruko386 摄影首页">
+        <!-- <img class="header-image" src="https://avatars.githubusercontent.com/u/140301008?v=4" width="58" height="58" alt=""> -->
+        <span class="site-name">HARUKO386</span>
+      </a>
+    </header>
+    <div class="layout">
+      <nav class="navigation" aria-label="画廊导航"></nav>
+      <main class="content">
+        <p class="gallery-message" role="status" hidden></p>
+        <section class="photo-view" aria-label="作品展示">
+          <figure>
+            <a class="photo-link" href="#" aria-label="下一张作品">
+              <img id="photograph" alt="" width="900" height="1200"
+                fetchpriority="high" draggable="false" hidden>
+            </a>
+            <figcaption>
+              <span id="photo-title" aria-live="polite"></span>
+              <span class="paging" aria-label="切换照片" hidden>
+                <button type="button" id="previous" aria-label="上一张">‹</button>
+                <span id="photo-count"></span>
+                <button type="button" id="next" aria-label="下一张">›</button>
+              </span>
+            </figcaption>
+          </figure>
+        </section>
+        <section class="archive-view" aria-label="所有作品" hidden>
+          <div class="thumbnails"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>

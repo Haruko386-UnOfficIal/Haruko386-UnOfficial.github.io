@@ -28,6 +28,7 @@
     var items = [
       ['home', '首页', root],
       ['archives', '归档', root + 'archives/'],
+      ['gallery', '画廊', root + '../collab/'],
       // ['links', '链接', root + 'links/']
     ];
     header.innerHTML = '<nav class="navbar' + (body.classList.contains('has-compact-hero') ? ' navbar-solid' : '') + '" id="navbar">' +
