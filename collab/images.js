@@ -99,19 +99,19 @@ window.galleryCollections = [
     "view": "archive",
     "images": [
       {
-        src: "https://github.com/Haruko386-UnOfficIal/ImageBed/blob/5e57c7eb53f48d86338107f016c72bb70d787379/haruko386-unoffical/collab/01.jpg",
+        src: "https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/5e57c7eb53f48d86338107f016c72bb70d787379/haruko386-unoffical/collab/01.jpg",
         title: "ROG Azoth X",
       },
       {
-        src: "https://github.com/Haruko386-UnOfficIal/ImageBed/blob/5e57c7eb53f48d86338107f016c72bb70d787379/haruko386-unoffical/collab/02.jpg",
+        src: "https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/5e57c7eb53f48d86338107f016c72bb70d787379/haruko386-unoffical/collab/02.jpg",
         title: "ROG Falchion Ace HFX",
       },
       {
-        src: "https://github.com/Haruko386-UnOfficIal/ImageBed/blob/5e57c7eb53f48d86338107f016c72bb70d787379/haruko386-unoffical/collab/03.jpg",
+        src: "https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/5e57c7eb53f48d86338107f016c72bb70d787379/haruko386-unoffical/collab/03.jpg",
         title: "ROG Keris II Origin & ROG Cetra True Wireless SpeedNova",
       },
       {
-        src: "https://github.com/Haruko386-UnOfficIal/ImageBed/blob/5e57c7eb53f48d86338107f016c72bb70d787379/haruko386-unoffical/collab/04.jpg",
+        src: "https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/5e57c7eb53f48d86338107f016c72bb70d787379/haruko386-unoffical/collab/04.jpg",
         title: "Beitong Asura 2Pro+ & ROG Hone Ace Aim Lab Edition",
       }
     ],

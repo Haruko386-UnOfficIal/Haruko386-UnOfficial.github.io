@@ -1,7 +1,20 @@
 ﻿(() => {
   'use strict';
+  function imageUrl(value) {
+    if (typeof value !== 'string') return value;
+    const original = value.trim();
+    try {
+      const url = new URL(original);
+      const match = url.pathname.match(/^\/([^/]+)\/([^/]+)\/blob\/(.+)$/);
+      if (url.protocol === 'https:' && url.hostname === 'github.com' && match) {
+        return `https://raw.githubusercontent.com/${match[1]}/${match[2]}/${match[3]}`;
+      }
+    } catch { /* Local relative paths stay relative to the gallery page. */ }
+    return original;
+  }
   const validImages = items => Array.isArray(items)
-    ? items.filter(image => image && typeof image.src === 'string' && image.src.trim()) : [];
+    ? items.filter(image => image && typeof image.src === 'string' && image.src.trim())
+      .map(image => ({ ...image, src: imageUrl(image.src), thumbnail: imageUrl(image.thumbnail) })) : [];
   const seen = new Set();
   const collections = (window.galleryCollections || []).filter(collection => {
     if (!collection || !/^[a-z0-9-]+$/i.test(collection.id || '') || seen.has(collection.id)) return false;
@@ -9,6 +22,7 @@
     return true;
   }).map(collection => ({ ...collection, images: validImages(collection.images) }));
   const navigation = document.querySelector('.navigation');
+  const archiveBack = document.querySelector('.archive-back');
   const photoView = document.querySelector('.photo-view');
   const archiveView = document.querySelector('.archive-view');
   const message = document.querySelector('.gallery-message');
@@ -20,6 +34,7 @@
   const paging = document.querySelector('.paging');
   const number = value => String(value + 1).padStart(2, '0');
   const collectionHash = collection => `#gallery/${collection.id}`;
+  const archiveHash = collection => `${collectionHash(collection)}/archive`;
   const photoHash = (collection, position) => `${collectionHash(collection)}/photo/${number(position)}`;
   const initialIndex = collection => Math.max(0, Math.min(
     Number.isInteger(collection.initialIndex) ? collection.initialIndex : 0,
@@ -61,10 +76,11 @@
     }
     const legacy = hash.match(/^#photo-(\d+)$/);
     if (legacy) return { collection: collections[0], position: Number(legacy[1]) - 1, archive: false };
-    const match = hash.match(/^#gallery\/([a-z0-9-]+)(?:\/photo\/(\d+))?$/i);
+    const match = hash.match(/^#gallery\/([a-z0-9-]+)(?:\/(archive|photo\/(\d+)))?$/i);
     const collection = collections.find(item => item.id === match?.[1]) || collections[0];
-    const position = match?.[2] ? Number(match[2]) - 1 : initialIndex(collection);
-    return { collection, position, archive: !match?.[2] && collection.view !== 'photo' };
+    const position = match?.[3] ? Number(match[3]) - 1 : initialIndex(collection);
+    const archive = match?.[2] === 'archive' || (!match?.[2] && collection.view !== 'photo');
+    return { collection, position, archive };
   }
 
   function preload(image) {
@@ -123,6 +139,8 @@
     const wasArchive = showingArchive;
     active = collection;
     showingArchive = selected.archive;
+    archiveBack.href = archiveHash(collection);
+    archiveBack.hidden = showingArchive;
     touchStart = null;
     message.hidden = true;
     document.title = `${collection.name || collection.id} — Haruko386`;
@@ -171,6 +189,9 @@
   photoLink.addEventListener('click', event => {
     event.preventDefault();
     if (performance.now() >= suppressClickUntil) step(1);
+  });
+  archiveBack.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
   });
   document.querySelector('#previous').addEventListener('click', () => step(-1));
   document.querySelector('#next').addEventListener('click', () => step(1));
