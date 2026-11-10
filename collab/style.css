@@ -122,7 +122,8 @@ button:focus-visible {
 }
 
 .photo-view {
-  max-width: 500px;
+  width: 100%;
+  max-width: 760px;
   margin: 0 auto;
 }
 
@@ -132,24 +133,24 @@ figure {
 
 .photo-link {
   display: block;
+  /* Keep the caption and paging on one baseline for every image orientation. */
+  height: clamp(220px, calc(100vh - 250px), 700px);
+  height: clamp(220px, calc(100svh - 250px), 700px);
   touch-action: pan-y pinch-zoom;
 }
 
 #photograph {
   display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 75vh;
-  max-height: 75svh;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 figcaption {
   min-height: 37px;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   gap: 15px;
   padding-top: 12px;
   font-size: 10px;
@@ -163,7 +164,11 @@ figcaption {
   white-space: nowrap;
   font-size: 9px;
   font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+  margin-left: auto;
 }
+
+#photo-title { min-width: 0; overflow-wrap: anywhere; }
 
 .paging button {
   display: grid;
@@ -215,11 +220,14 @@ figcaption {
   opacity: .85;
 }
 
-@media (min-width: 701px) and (max-height: 800px) {
-  .photo-view {
-    max-width: min(500px, 61vh);
-  }
+.archive-more {
+  margin-top: 28px;
+  text-align: right;
+  font-size: 12px;
+  line-height: 1.5;
 }
+
+.see-more span { margin-left: 6px; }
 
 @media (max-width: 700px) {
   :root {
@@ -271,6 +279,11 @@ figcaption {
 
   .content {
     padding: 30px 24px 0;
+  }
+
+  .photo-link {
+    height: clamp(180px, calc(100vh - 330px), 600px);
+    height: clamp(180px, calc(100svh - 330px), 600px);
   }
 
   .thumbnails {

@@ -31,6 +31,8 @@
   const title = document.querySelector('#photo-title');
   const count = document.querySelector('#photo-count');
   const thumbnails = document.querySelector('.thumbnails');
+  const archiveMore = document.querySelector('.archive-more');
+  const seeMore = document.querySelector('.see-more');
   const paging = document.querySelector('.paging');
   const number = value => String(value + 1).padStart(2, '0');
   const collectionHash = collection => `#gallery/${collection.id}`;
@@ -46,6 +48,7 @@
   let active = null;
   let index = 0;
   let showingArchive = false;
+  let archiveContentKey = '';
   let renderVersion = 0;
   let touchStart = null;
   let suppressClickUntil = 0;
@@ -89,7 +92,7 @@
     const collection = collections.find(item => item.id === match?.[1]) || collections[0];
     const position = match?.[3] ? Number(match[3]) - 1 : initialIndex(collection);
     const archive = match?.[2] === 'archive' || (!match?.[2] && collection.view !== 'photo');
-    return { collection, position, archive };
+    return { collection, position, archive, preview: archive && match?.[2] !== 'archive' };
   }
 
   function preload(image) {
@@ -117,8 +120,8 @@
     }
   }
 
-  function buildArchive(collection) {
-    const entries = collection.images.map((image, position) => {
+  function buildArchive(collection, limit) {
+    const entries = collection.images.slice(0, limit).map((image, position) => {
       const link = document.createElement('a');
       link.className = 'thumbnail';
       link.href = photoHash(collection, position);
@@ -150,6 +153,7 @@
     showingArchive = selected.archive;
     archiveBack.href = archiveHash(collection);
     archiveBack.hidden = showingArchive;
+    archiveMore.hidden = true;
     touchStart = null;
     message.hidden = true;
     document.title = `${collection.name || collection.id} — Haruko386`;
@@ -158,7 +162,6 @@
       else link.removeAttribute('aria-current');
     });
     if (changed) {
-      buildArchive(collection);
       photo.hidden = true;
       title.textContent = '';
       count.textContent = '';
@@ -168,9 +171,19 @@
     photoView.hidden = showingArchive;
     archiveView.hidden = !showingArchive;
     if (showingArchive) {
+      const limit = selected.preview && Number.isInteger(collection.previewLimit) && collection.previewLimit > 0
+        ? Math.min(collection.previewLimit, collection.images.length) : collection.images.length;
+      const key = `${collection.id}:${limit}`;
+      if (key !== archiveContentKey) {
+        buildArchive(collection, limit);
+        archiveContentKey = key;
+      }
+      seeMore.href = archiveHash(collection);
+      archiveMore.hidden = limit >= collection.images.length;
       if (photoView.contains(document.activeElement)) thumbnails.querySelector('a')?.focus({ preventScroll: true });
       return;
     }
+    if (wasArchive) window.scrollTo({ top: 0, behavior: 'auto' });
     index = Math.max(0, Math.min(collection.images.length - 1, selected.position));
     const requestedIndex = index;
     const image = collection.images[requestedIndex];
@@ -200,6 +213,9 @@
     if (performance.now() >= suppressClickUntil) step(1);
   });
   archiveBack.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  });
+  seeMore.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   });
   document.querySelector('#previous').addEventListener('click', () => step(-1));

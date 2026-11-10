@@ -64,9 +64,10 @@ window.galleryCollections = [
   //   images: window.galleryImages,
   // },
   {
-    id: 'waiting',
+    id: 'collab',
     name: "Collab",
     view: 'archive',
+    previewLimit: 9, // 首页展示前 9 张，See more 打开完整目录。
     images: window.galleryImages,
   },
   {
@@ -109,6 +110,10 @@ window.galleryCollections = [
       {
         src: "https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/5e57c7eb53f48d86338107f016c72bb70d787379/haruko386-unoffical/collab/04.jpg",
         title: "Beitong Asura 2Pro+ & ROG Hone Ace Aim Lab Edition",
+      },
+      {
+        src: "https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/2b8b1bf2b59b5f4c7f585cbb435d9aefdd798284/haruko386-unoffical/collab/05.webp",
+        title: "Nikon Z30",
       }
     ],
   },
