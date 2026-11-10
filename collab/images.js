@@ -20,6 +20,9 @@ window.galleryImages = [
     src: 'https://haruko386.github.io/gallery/img/img_101.jpg',
   },
   {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/b8612993eb3cf00337b8b3e60729b6f9e9149e91/haruko386-unoffical/collab/DSC_0216.webp',
+  },
+  {
     src: 'https://haruko386.github.io/gallery/img/img_27.jpg',
   },
   {
