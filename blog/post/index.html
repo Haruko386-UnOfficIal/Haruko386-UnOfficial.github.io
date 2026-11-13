@@ -35,6 +35,7 @@
   <button class="scroll-top" data-scroll-top type="button" aria-label="回到顶部">⌃</button>
   <footer class="site-footer" data-site-footer></footer>
   <script src="../app.js"></script>
+  <script src="../callouts.js"></script>
   <script>
     (function () {
       var slug = new URLSearchParams(location.search).get('p');
@@ -82,6 +83,7 @@
         markdown = markdown.replace(/^\uFEFF?---\s*\r?\n[\s\S]*?\r?\n---\s*(?:\r?\n|$)/, '');
         marked.setOptions({ gfm: true, breaks: false });
         body.innerHTML = marked.parse(markdown);
+        if (window.Callouts) window.Callouts.decorate(body);
         if (window.hljs) {
           body.querySelectorAll('pre code').forEach(function (block) { window.hljs.highlightElement(block); });
         }

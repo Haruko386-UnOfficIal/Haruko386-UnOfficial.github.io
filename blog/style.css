@@ -300,6 +300,27 @@ button, input { font: inherit; }
 .markdown-body img { display: block; height: auto; margin: 22px auto; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,.13); }
 .markdown-body blockquote { padding: 11px 17px; border-left: 4px solid var(--accent); color: var(--muted); background: var(--code-bg); }
 .markdown-body blockquote > :last-child { margin-bottom: 0; }
+
+/* ---- 自定义段落：> [!note] ----
+   颜色由 JS 写进 --callout-color；未登记的类型按名字自动取色。
+   用 color-mix 跟当前主题的正文色混合，深色模式下会自动变亮，不用另写一套。 */
+.markdown-body blockquote.callout {
+  --callout-color: var(--accent);
+  padding: 13px 18px;
+  border-left-color: var(--callout-color);
+  border-radius: 0 6px 6px 0;
+  color: var(--text);
+  background: var(--code-bg);
+  background: color-mix(in srgb, var(--callout-color) 9%, var(--card-bg));
+}
+.markdown-body blockquote.callout > :last-child { margin-bottom: 0; }
+.markdown-body .callout-title {
+  margin: 0 0 .5em;
+  color: color-mix(in srgb, var(--callout-color) 62%, var(--text));
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
 .markdown-body code { padding: .15em .38em; border-radius: 3px; background: var(--code-bg); font: .9em/1.5 "SFMono-Regular", Consolas, "Liberation Mono", Monaco, monospace; }
 .markdown-body pre {
   overflow: auto;
