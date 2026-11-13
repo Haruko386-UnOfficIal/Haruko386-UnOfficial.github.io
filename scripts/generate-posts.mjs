@@ -43,11 +43,18 @@ function asList(value) {
   return value === undefined || value === null || value === '' ? [] : [String(value)];
 }
 
+// Windows 上写 front matter 容易写成 static\banner\x.jpg；
+// 浏览器会把反斜杠当转义字符丢掉，封面就加载不出来，所以统一转成正斜杠。
+function assetPath(value = '') {
+  return String(value).trim().replace(/\\/g, '/').replace(/^\.\//, '');
+}
+
 function createExcerpt(markdown) {
   return markdown
     .replace(/```[\s\S]*?```/g, ' ')
     .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/\[![^\]]+\]/g, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/^\s{0,3}(#{1,6}|>|[-*+]\s|\d+\.\s)\s*/gm, '')
     .replace(/[`*_~|]/g, '')
@@ -72,7 +79,7 @@ for (const file of files) {
     date: String(data.date || '').slice(0, 10),
     categories: asList(data.categories || data.category || data.ccategories),
     tags: asList(data.tags),
-    cover: String(data.index_img || data.cover || ''),
+    cover: assetPath(data.index_img || data.cover || ''),
     excerpt: String(data.description || data.excerpt || createExcerpt(body)),
     top: data.top === true || data.sticky === true,
   });
