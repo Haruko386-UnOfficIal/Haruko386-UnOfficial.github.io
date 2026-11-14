@@ -142,6 +142,20 @@
     restartAnimation();
   }
 
+  function startClock() {
+    var clock = document.getElementById("desktop-clock");
+    if (!clock) return;
+    function update() {
+      var now = new Date();
+      clock.dateTime = now.toISOString();
+      clock.textContent = now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", hour12: false });
+      clock.title = now.toLocaleDateString("zh-CN");
+    }
+    update();
+    window.setInterval(update, 1000 * 30);
+  }
+
+  startClock();
   loadGradientConfig();
   createStarfield();
 })();

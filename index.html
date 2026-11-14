@@ -1,42 +1,145 @@
 <!doctype html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Haruko386's LinkTree — a minimal GitHub Pages site.">
-    <meta name="theme-color" content="#35aebd" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#030610" media="(prefers-color-scheme: dark)">
-    <title>Haruko386</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" href="https://avatars.githubusercontent.com/u/140301008?v=4">
-  </head>
-  <body>
-    <div class="gradient-background" aria-hidden="true"></div>
-    <div class="galaxy" aria-hidden="true"></div>
-    <canvas class="starfield" id="starfield" aria-hidden="true"></canvas>
+<html lang="zh-CN" data-view="home">
 
-    <main class="home">
-      <img
-        class="avatar"
-        src="https://avatars.githubusercontent.com/u/140301008?v=4"
-        alt="Haruko386 的头像"
-        width="112"
-        height="112"
-      >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Haruko386">
+  <meta name="theme-color" content="#35aebd" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#030610" media="(prefers-color-scheme: dark)">
+  <title>Haruko386</title>
+  <script>document.documentElement.dataset.view = location.hash === "#world-machine" ? "machine" : "home";</script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/desktop.css">
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/140301008?v=4">
+</head>
+
+<body>
+  <div class="gradient-background" aria-hidden="true"></div>
+  <div class="galaxy" aria-hidden="true"></div>
+  <div class="grid-background" aria-hidden="true"></div>
+  <canvas class="starfield" id="starfield" aria-hidden="true"></canvas>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 48 48">
+      <path d="M5 22 24 6l19 16v20H29V29H19v13H5Z" />
+      <path d="M17 12V6H9v13" />
+    </symbol>
+    <symbol id="i-folder" viewBox="0 0 48 48">
+      <path d="M4 13V8h16l5 6h19v27H4Z" />
+      <path d="M4 20h40" />
+    </symbol>
+    <symbol id="i-note" viewBox="0 0 48 48">
+      <path d="M10 4h21l9 9v31H10Z" />
+      <path d="M30 4v11h10M17 23h16M17 30h16M17 37h10" />
+    </symbol>
+    <symbol id="i-picture" viewBox="0 0 48 48">
+      <rect x="4" y="7" width="40" height="34" rx="3" />
+      <circle cx="16" cy="18" r="4" />
+      <path d="m5 36 12-11 8 7 8-13 11 16" />
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 48 48">
+      <path d="m24 3 6 14 15 2-11 11 3 15-13-8-13 8 3-15L3 19l15-2Z" />
+    </symbol>
+    <symbol id="i-code" viewBox="0 0 48 48">
+      <rect x="3" y="6" width="42" height="36" rx="4" />
+      <path d="m17 17-8 7 8 7m14-14 8 7-8 7M27 15l-6 18" />
+    </symbol>
+  </svg>
+  <div class="page-views">
+    <section class="home-view" aria-label="Home">
+      <main class="home">
+        <img class="avatar" src="https://avatars.githubusercontent.com/u/140301008?v=4" alt="Haruko386 的头像" width="112"
+          height="112">
+        <h1>Haruko386</h1>
+        <p class="tagline">These stars were never mine to chase</p>
+
+        <nav class="links" aria-label="主要链接">
+          <a href="https://haruko386.github.io/" target="_blank" rel="noopener noreferrer">About</a>
+          <a href="./collab/" target="_blank" rel="noopener noreferrer">Gallery</a>
+          <a href="blog/">Blog</a>
+          <a href="https://space.bilibili.com/291003955" target="_blank" rel="noopener noreferrer">Bilibili</a>
+          <a href="https://www.instagram.com/endless_developy" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.speedrun.com/users/Limpid" target="_blank" rel="noopener noreferrer">Speedrun</a>
+          <a href="https://steamcommunity.com/profiles/76561198217881431/" target="_blank"
+            rel="noopener noreferrer">Steam</a>
+        </nav>
+      </main>
+    </section>
+    <section class="machine-view" aria-label="World Machine" inert aria-hidden="true">
+      <main class="desktop">
+        <header class="desktop-bar">
+          <button class="brand" data-desktop title="Show desktop">HARUKO386</button>
+          <time id="desktop-clock" aria-label="Desktop"></time>
+        </header>
+        <nav class="tab-strip" aria-label="Desktop navigation">
+          <button class="desktop-tab" data-desktop aria-pressed="false">&#8962; Desktop</button>
+          <div id="window-tabs"></div>
+        </nav>
+        <div class="work-area" id="work-area">
+          <nav class="shortcuts" aria-label="Desktop navigation">
+            <a href="#" data-app="note" aria-label="Home"><svg class="mint" aria-hidden="true">
+                <use href="#i-home" />
+              </svg><span>Home</span></a>
+            <a href="blog/" data-app="blog" aria-label="Blog"><svg class="yellow" aria-hidden="true">
+                <use href="#i-note" />
+              </svg><span>Blog</span></a>
+            <a href="collab/" data-app="gallery" aria-label="Gallery"><svg class="coral" aria-hidden="true">
+                <use href="#i-picture" />
+              </svg><span>Gallery</span></a>
+            <a href="#" data-app="links" aria-label="Links"><svg class="blue" aria-hidden="true">
+                <use href="#i-code" />
+              </svg><span>Links</span></a>
+          </nav>
+          <div id="window-layer"></div>
+        </div>
+        <nav class="dock" aria-label="Desktop">
+          <a href="#" data-app="note" aria-label="Home"><svg class="mint" aria-hidden="true">
+              <use href="#i-home" />
+            </svg><span>Home</span></a>
+          <a href="blog/" data-app="blog" aria-label="Blog"><svg class="yellow" aria-hidden="true">
+              <use href="#i-note" />
+            </svg><span>Blog</span></a>
+          <a href="collab/" data-app="gallery" aria-label="Gallery"><svg class="coral" aria-hidden="true">
+              <use href="#i-picture" />
+            </svg><span>Gallery</span></a>
+          <a href="#" data-app="links" aria-label="Links"><svg class="blue" aria-hidden="true">
+              <use href="#i-code" />
+            </svg><span>Links</span></a>
+        </nav>
+      </main>
+    </section>
+  </div>
+  <p id="desktop-announcement" class="sr-only" role="status"></p>
+  <template id="note-content">
+    <div class="note-content">
+      <img class="avatar" src="https://avatars.githubusercontent.com/u/140301008?v=4" alt="" width="72" height="72">
       <h1>Haruko386</h1>
-      <p class="tagline">These stars were never mine to chase</p>
+      <p class="tagline">These stars were never<br>mine to chase.</p>
+      <a href="https://haruko386.github.io/" data-app="about">About me &#8599;</a>
+    </div>
+  </template>
+  <template id="folders-content">
+    <nav class="folder-grid" aria-label="Folders">
+      <a href="blog/" data-app="blog"><svg class="yellow" aria-hidden="true">
+          <use href="#i-folder" />
+        </svg><span>Blog</span></a>
+      <a href="collab/" data-app="gallery"><svg class="yellow" aria-hidden="true">
+          <use href="#i-folder" />
+        </svg><span>Gallery</span></a>
+    </nav>
+  </template>
+  <template id="links-content">
+    <nav class="social-links" aria-label="Desktop">
+      <a href="https://github.com/Haruko386" data-app="github">GitHub <span>&#8599;</span></a>
+      <a href="https://space.bilibili.com/291003955" data-app="bilibili">Bilibili <span>&#8599;</span></a>
+      <a href="https://www.instagram.com/endless_developy" data-app="instagram">Instagram <span>&#8599;</span></a>
+      <a href="https://www.speedrun.com/users/Limpid" data-app="speedrun">Speedrun <span>&#8599;</span></a>
+      <a href="https://steamcommunity.com/profiles/76561198217881431/" data-app="steam">Steam <span>&#8599;</span></a>
+    </nav>
+  </template>
+  <script src="assets/js/desktop.js"></script>
+  <script src="assets/js/view.js"></script>
+  <script src="assets/js/main.js" data-colors="assets/data/colors.json"></script>
+</body>
 
-      <nav class="links" aria-label="主要链接">
-        <a href="https://haruko386.github.io/" target="_blank" rel="noopener noreferrer">About</a>
-        <a href="./collab/" target="_blank" rel="noopener noreferrer">Gallery</a>
-        <a href="blog/">Blog</a>
-        <a href="https://space.bilibili.com/291003955" target="_blank" rel="noopener noreferrer">Bilibili</a>
-        <a href="https://www.instagram.com/endless_developy" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="https://www.speedrun.com/users/Limpid" target="_blank" rel="noopener noreferrer">Speedrun</a>
-        <a href="https://steamcommunity.com/profiles/76561198217881431/" target="_blank" rel="noopener noreferrer">Steam</a>
-      </nav>
-    </main>
-
-    <script src="assets/js/main.js" data-colors="assets/data/colors.json"></script>
-  </body>
 </html>

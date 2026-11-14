@@ -255,10 +255,12 @@ code {
     background-position: 0% 40%;
     transform: scale(1) rotate(0deg);
   }
+
   50% {
     background-position: 100% 60%;
     transform: scale(1.08) rotate(1.5deg);
   }
+
   100% {
     background-position: 0% 40%;
     transform: scale(1) rotate(0deg);
@@ -269,6 +271,7 @@ code {
   from {
     transform: translate3d(-3%, -2%, 0) scale(1);
   }
+
   to {
     transform: translate3d(5%, 3%, 0) scale(1.1);
   }
@@ -284,6 +287,7 @@ code {
   from {
     transform: rotate(-19deg) scale(1.08) translate3d(-1.2%, -0.5%, 0);
   }
+
   to {
     transform: rotate(-17.5deg) scale(1.12) translate3d(1.3%, 0.7%, 0);
   }
@@ -300,6 +304,7 @@ code {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .gradient-background,
   .gradient-background::after,
   .galaxy {
