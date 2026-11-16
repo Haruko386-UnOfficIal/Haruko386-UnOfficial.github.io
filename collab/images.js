@@ -8,7 +8,7 @@ window.galleryImages = [
     src: 'https://haruko386.github.io/gallery/img/img_60.jpg',
   },
   {
-    src: 'https://haruko386.github.io/gallery/img/img_108.webp',
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0339.webp'
   },
   {
     src: 'https://haruko386.github.io/gallery/img/img_33.jpg',
@@ -19,8 +19,8 @@ window.galleryImages = [
   {
     src: 'https://haruko386.github.io/gallery/img/img_101.jpg',
   },
-  {
-    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/b8612993eb3cf00337b8b3e60729b6f9e9149e91/haruko386-unoffical/collab/DSC_0216.webp',
+   {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0430.webp'
   },
   {
     src: 'https://haruko386.github.io/gallery/img/img_27.jpg',
@@ -42,6 +42,36 @@ window.galleryImages = [
   },
   {
     src: 'https://haruko386.github.io/gallery/img/img_49.jpg',
+  },
+  {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0322.webp'
+  },
+  {
+    src: 'https://haruko386.github.io/gallery/img/img_108.webp',
+  },
+  {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0344.webp'
+  },
+  {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0441.webp'
+  },
+  {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0461.webp'
+  },
+  {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0543.webp'
+  },
+  {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0546.webp'
+  },
+  {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0550.webp'
+  },
+  {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/cfa23e24466e57a26d1f56f9cec9e2c9002f555e/haruko386-unoffical/collab/DSC_0570.webp'
+  },
+  {
+    src: 'https://raw.githubusercontent.com/Haruko386-UnOfficIal/ImageBed/b8612993eb3cf00337b8b3e60729b6f9e9149e91/haruko386-unoffical/collab/DSC_0216.webp',
   }
 ];
 
