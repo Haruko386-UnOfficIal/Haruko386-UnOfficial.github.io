@@ -72,6 +72,6 @@
 
   var footer = document.querySelector('[data-site-footer]');
   if (footer) {
-    footer.innerHTML = '<div>© ' + new Date().getFullYear() + ' Haruko386</div><div>Powered by HTML · CSS · JavaScript</div>';
+    footer.innerHTML = '<div>© ' + new Date().getFullYear() + ' Haruko386</div><div>愿我们都能，前程似锦</div>';
   }
 })();

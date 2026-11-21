@@ -11,8 +11,21 @@
       "Quention & Answer"
     ],
     "cover": "https://s2.loli.net/2023/06/11/UisftN8CM325ruT.jpg",
-    "excerpt": "Q&A 你的昵称为什么叫Haruko386? 是我曾经喜欢的一位Up的名称，但由于我也不知道的原因她退网了，我用她曾经的昵称是为了永远记住她 这个博客会发布哪些内容？ 在2024年6月，也就是我本科毕业前更新的都是技术向的内容，现在读研阶段主要更一些技术向文章，以及是对自己所处的当下的一些思考。 你什么成分？ 就一计科硕士，方向是最没用的、最没前途的CV方向",
+    "excerpt": "Q&A 你的昵称为什么叫Haruko386? 是我曾经喜欢的一位Up的名称，但由于我也不知道的原因她退网了，我用她曾经的昵称是为了永远记住她 这个博客会发布哪些内容？ 在2024年6月，也就是我本科毕业前更新的都是技术向的内容，现在读2024年9月到2026年8月读研阶段主要更一些技术向文章，以及是对自己所处的当下的一些思考。2026年8月至今，主要是更一些",
     "top": true
+  },
+  {
+    "slug": "young",
+    "file": "young.md",
+    "title": "你永远不会比现在更年轻了",
+    "date": "2026-11-21",
+    "categories": [
+      "Diary"
+    ],
+    "tags": [],
+    "cover": "https://i.imgs.ovh/2026/11/21/999e8312c6acffb9794d240eb38dadc0.jpg",
+    "excerpt": "Zero The cashier at your grocery store The foreman at your plant The guy tailgating you home on the highway The telemarketer calling you during dinner Every teacher you've ever had",
+    "top": false
   },
   {
     "slug": "reflection",

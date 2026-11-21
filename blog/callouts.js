@@ -20,7 +20,7 @@ window.calloutTypes = {
   // 自定义段落示例：把注释去掉就能用
   sentence: { label: 'sentence', color: '#fb8db1' },
   heart: { label: '', color: '#f66e67' },
-  // quote: { label: '', color: '#5f7d95' },  // 不要标题行
+  quote: { label: '', color: '#768cfb' },  // 不要标题行
 };
 
 (function (global) {
